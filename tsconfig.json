@@ -28,10 +28,17 @@
       "dom.iterable",
       "esnext"
     ],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
   },
   // 指定需要编译的文件
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
   ]
+  
 }
