@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import { useSelector, useDispatch, shallowEqual } from "react-redux"
 import {setUser} from "../../store/modules/user"
 import {withRouter} from '../../hoc'
-
+import storage from "../../utils/storage"
 const Demo = memo((props)=>{
   console.log(props);
 
@@ -15,6 +15,8 @@ const Demo = memo((props)=>{
   // 改变数据
   const dispatch = useDispatch()
   function changeMessageHandle() {
+    storage.setToken(123456)
+    storage.getForEachAll()
     dispatch(setUser({name:"你好啊,我是张三",pwd:'123456'}))
   }
   return (

@@ -1,19 +1,17 @@
 
 import Login from "../login/login";
-import maps from "./modules/maps"
+import RouterList from "./modules"
 // const Login = lazy((()=>import('@/login/login')))
-import {
-  createHashRouter,
-} from "react-router-dom";
+import type { RouteObject } from 'react-router-dom'
 
 
-const router = createHashRouter([
+const routes:RouteObject[] = [
   {
     path: "/login",
     element: <Login />,
   },
-  ...maps
-]);
+  ...RouterList
+];
 
 
-export default router
+export default routes

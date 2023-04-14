@@ -1,11 +1,11 @@
 import {BASE_URL,TIMEOUT} from "./config"
-import axios ,{ AxiosInstance, AxiosRequestConfig}from "axios";
+import axios ,{ AxiosInstance}from "axios";
 import storage from "../../utils/storage"
-import {useNavigate} from "react-router-dom"
+// import {useNavigate} from "react-router-dom"
 import {RequestConfig} from "../type/requestType"
 // 请求类
 class Request {
-  public instance:AxiosInstance;
+   instance:AxiosInstance;
     constructor(baseURL:string, timeout:number) {
       this.instance = axios.create({
           baseURL,
@@ -16,15 +16,15 @@ class Request {
           },
         })
         //请求拦截
-        const navigate = useNavigate()
+        // const navigate = useNavigate()
         this.instance.interceptors.request.use((config:any) => {
           const token = storage.getToken();
           config.headers["token"] = token;
           if ( !token) {
             config.cancelToken = new axios.CancelToken((cancel: Function) => {
               cancel(); // 取消请求
-              //跳转到首页
-              navigate("/login")
+              //跳转到
+              // navigate("/login")
             });
           }
           return config;
@@ -38,26 +38,26 @@ class Request {
           return err
         })
       }
-      request<T = any>(config:any) {
+      request(config:any) {
         return this.instance.request(config)
       }
       //get请求
-      get<T = any>(config:RequestConfig) {
+      get<T = any>(config:RequestConfig<T>) {
         return this.request({ ...config, method: "get" })
       }
       //post请求
-      post<T = any>(config:RequestConfig) {
+      post<T = any>(config:RequestConfig<T>) {
         return this.request({ ...config, method: "post" })
       }
       //put请求
-      put<T = any>(config:RequestConfig) {
+      put<T = any>(config:RequestConfig<T>) {
         return this.request({ ...config, method: "put" })
       }
       //delete请求
-      delete(config:any) {
+      delete<T = any>(config:RequestConfig<T>) {
         return this.request({ ...config, method: "delete" })
       }
 }
 
 
-export default new Request(BASE_URL, TIMEOUT)
+export const ConfugRequest =  new Request(BASE_URL, TIMEOUT)

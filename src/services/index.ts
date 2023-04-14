@@ -1,5 +1,5 @@
-import Request from "./request"
+import { ConfugRequest } from "./request"
 
-export default Request
+export default ConfugRequest
 
 export * from "./modules/user"

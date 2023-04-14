@@ -1,20 +1,33 @@
 // config-overrides.js
 /* eslint-disable no-useless-computed-key */
 const {
+  watchAll,
   override,
   addWebpackAlias,
   addWebpackResolve,
   addLessLoader,
+  fixBabelImports,
+  adjustStyleLoaders,
   addWebpackPlugin,
+  overrideDevServer,
   addWebpackModuleRule,
 } = require('customize-cra');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin'); // 代码压缩
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer'); // 大文件定位
 const ProgressBarPlugin = require('progress-bar-webpack-plugin'); // 打包进度
-const CompressionPlugin = require('compression-webpack-plugin'); // gzip压缩
+// const CompressionPlugin = require('compression-webpack-plugin'); // gzip压缩
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // css压缩
 const path = require('path');
 
+const apis = [
+  '192.168.110.77:8087', // 邹家豪
+  '192.168.110.36:8000', // 测试
+  '192.168.110.85:8091', // 刘志刚
+  '192.168.110.73:8087', // 张亚峰
+  '192.168.110.71:8087', // 陈思宇
+]
+
+const ProxyApiPath = apis[4]
 module.exports = {
   devServer: overrideDevServer((config) => {
     return {
@@ -72,6 +85,7 @@ module.exports = {
       cssModules: {
         localIdentName: '[path][name]__[local]--[hash:base64:5]', // if you use CSS Modules, and custom `localIdentName`, default is '[local]--[hash:base64:5]'.
       },
+      
     }),
     // 注意是production环境启动该plugin
     process.env.NODE_ENV === 'production' &&
@@ -121,6 +135,14 @@ module.exports = {
     addWebpackModuleRule({
       test: [/\.css$/, /\.less$/], // 可以打包后缀为sass/scss/css的文件
       use: ['style-loader', 'css-loader', 'less-loader'],
+    }),
+    adjustStyleLoaders(({ use: [, , postcss] }) => {
+      const postcssOptions = postcss.options;
+      postcss.options = { postcssOptions };
+    }),
+    fixBabelImports('antd', {
+      libraryDirectory: 'es',
+      style: true,
     })
   )
 }
