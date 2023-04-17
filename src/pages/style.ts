@@ -9,6 +9,7 @@ export const HomeSty = styled.div`
             width: 300px;
             display:flex;
             justify-content: center;
+            ${(props) => props.theme.mixin.backColor}
         }
 
         .right_con {
