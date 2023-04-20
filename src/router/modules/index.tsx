@@ -1,4 +1,4 @@
-// import Map from "../../pages/maps/map";
+import Map from "../../pages/maps/map";
 import { Navigate } from 'react-router-dom'
 import StoreDemo from "../../pages/StoreDemo/index";
 import HomeIndex from "../../pages/index";
@@ -9,7 +9,6 @@ import SysConfiguration from "../../pages/sysConfiguration/sysConfiguration";
 
 const maps = [{
   path: "/",
-  // element: <Map />,
   element: <Navigate to="/home" />,
 },
 {
@@ -39,7 +38,11 @@ const maps = [{
     {
       path: "/home/demo",
       element: <StoreDemo />,
-    }
+    },
+    {
+      path: "/home/map",
+      element: <Map />,
+    },
   ]
 },
 
