@@ -5,6 +5,7 @@ import RouterList from "./modules"
 import type { RouteObject } from 'react-router-dom'
 import Line from "../pages/demo/line";
 import Example from "../pages/demo/example/example";
+import ELine from "../pages/demo/eline";
 
 const routes:RouteObject[] = [
   {
@@ -18,6 +19,10 @@ const routes:RouteObject[] = [
   {
     path: "/example",
     element: <Example />,
+  },
+  {
+    path: "/eline",
+    element: <ELine />,
   },
   ...RouterList
 ];
