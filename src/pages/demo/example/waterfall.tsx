@@ -58,9 +58,9 @@ const Waterfall = () => {
 
     let waterFallIndex = 0
     setInterval(() => {
-      // waterFallIndex++
-      // const data1 = Array.from({ length: 1000 }, () => Math.floor(Math.random() * 100));
-      // rowToImageData(data1)
+      waterFallIndex++
+      const data1 = Array.from({ length: 1000 }, () => Math.floor(Math.random() * 100));
+      rowToImageData(data1)
     }, 1000);
 
     // 绘制单行图像

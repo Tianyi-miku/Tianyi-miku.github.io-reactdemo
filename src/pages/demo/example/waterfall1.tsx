@@ -27,7 +27,6 @@ const Waterfall = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const waterFallCtx = canvas.getContext("2d");
-    const ctx = canvas.getContext("2d");
 
     //宽度与高度
     let dd = waterFallCtx.createImageData(500, 1)
