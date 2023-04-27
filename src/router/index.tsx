@@ -5,8 +5,11 @@ import RouterList from "./modules"
 import type { RouteObject } from 'react-router-dom'
 import Line from "../pages/demo/line";
 import Example from "../pages/demo/example/example";
+import ELine from "../pages/demo/eline";
+import Waterfall from "../pages/demo/example/waterfall";
+import Waterfall1 from "../pages/demo/example/waterfall1";
 
-const routes:RouteObject[] = [
+const routes: RouteObject[] = [
   {
     path: "/login",
     element: <Login />,
@@ -18,6 +21,18 @@ const routes:RouteObject[] = [
   {
     path: "/example",
     element: <Example />,
+  },
+  {
+    path: "/eline",
+    element: <ELine />,
+  },
+  {
+    path: "/waterfall",
+    element: <Waterfall />,
+  },
+  {
+    path: "/waterfall1",
+    element: <Waterfall1 />,
   },
   ...RouterList
 ];
