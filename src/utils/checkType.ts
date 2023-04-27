@@ -51,4 +51,3 @@ export class isArray {
       classType[toString.call(obj)] || 'object' :
       typeof obj
   }
-  
