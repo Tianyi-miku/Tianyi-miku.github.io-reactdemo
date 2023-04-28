@@ -38,6 +38,7 @@ const Waterfall = () => {
     setInterval(() => {
       let dd = waterFallCtx.createImageData(500, 1)
       let imageData = insetImageData(dd)
+      
       waterFallCtx.drawImage(waterFallCtx.canvas, 0, 0, 300, 300 - 1, 0, 1, 300, 300 - 1)
       waterFallCtx.putImageData(imageData, 0, 1)
     }, 1000)

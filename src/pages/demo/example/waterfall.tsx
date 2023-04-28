@@ -21,15 +21,13 @@ let colormaps = colormap({
   format: 'rba',
   alpha: 1
 })
-console.log(colormaps);
 
 const insetImageData = (imageData: any, data: any[]) => {
   for (let i = 0; i < imageData.data.length; i += 4) {
     const cindex = squeeze(data[i / 4], 0, 130)
-    let color = colormaps[cindex]
-    console.log(color);
     
-
+    let color = colormaps[cindex]
+    
     imageData.data[i + 0] = color[0]
     imageData.data[i + 1] = color[1]
     imageData.data[i + 2] = color[2]
