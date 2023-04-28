@@ -19,6 +19,10 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin'); // 打包进�
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // css压缩
 const path = require('path');
 
+
+function resolve (...paths) {
+  return path.resolve(process.cwd(), ...paths)
+}
 const apis = [
   '192.168.110.77:8087', // 邹家豪
   '192.168.110.36:8000', // 测试
@@ -61,6 +65,7 @@ module.exports = {
       },
     };
   }, watchAll()),
+
   webpack: override(
     // 导入文件的时候可以不用添加文件的后缀名
     addWebpackResolve({
@@ -68,8 +73,10 @@ module.exports = {
     }),
     // 路径别名
     addWebpackAlias({
-      ['@']: path.join(__dirname, '/src'),
-      '@util': path.join(__dirname, '/src/utils'),
+      '@': resolve('src'),
+      "@api": resolve("src/api"),
+      "@pages": resolve("src/pages"),
+      "@utils": resolve("src/utils"),
       '@static': path.join(__dirname, '/src/static'),
       '@store': path.join(__dirname, '/src/store'),
       '@common': path.join(__dirname, '/src/common'),
