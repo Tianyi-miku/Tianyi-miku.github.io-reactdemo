@@ -1,0 +1,97 @@
+@import '../assets/styles/themeColor.less';
+
+html,
+body,
+#root {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.layout {
+  height: 100vh;
+  background: url(../assets/images/control/background.png) 100% 100% fixed;
+  background-size: cover;
+  transition: all .3s;
+  position: relative;
+
+  &-content {
+    color: #fff;
+    // overflow: hidden;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 114px;
+  }
+
+  .fullScene-content {
+    top: 50px;
+  }
+
+  .bodyBoder {
+    width: 97%;
+    margin: auto;
+    border: 1px solid #3C8EF6;
+    height: 100%;
+    border-radius: 5px;
+    //background: linear-gradient(180deg, #1e4266 0%, #0b1521 100%);
+    background: linear-gradient(180deg, #1C2C55 0%, #20326236 100%);
+    box-shadow: 0 0 10px #19335F;
+    //border-image: linear-gradient(90deg, #f00, #0f0);
+  }
+
+  &-nav {
+    height: 50px;
+    line-height: 50px;
+    background-color: transparent;
+    z-index: 99;
+    cursor: default;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    width: 97%;
+    position: absolute;
+    top: calc(114px - 50px);
+    left: 1.5%;
+
+
+    &-list {
+      display: flex;
+
+      .title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #28b0fe;
+        z-index: 100;
+        cursor: pointer;
+      }
+
+      .nav-item {
+        color: @textColor;
+        border: 1px solid @inputBorderColor;
+        height: 30px;
+        font-size: 14px;
+        line-height: 14px;
+        margin: 10px 4px 0 0;
+        padding: 7px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .nav-item-avtive {
+        background: @backgroundLightLinearColor;
+      }
+
+    }
+
+    .ant-btn {
+      height: 30px;
+      line-height: 24px;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+  }
+
+  .layout-nav-fullScene {
+    top: 0;
+  }
+}

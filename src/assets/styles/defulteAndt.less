@@ -1,0 +1,79 @@
+@import "./themeColor.less";
+@import './module/ant-modal-wrap.less';
+@import './module/ant-btn.less';
+@import './module/ant-calendar.less';
+@import './module/ant-card.less';
+@import './module/ant-checkbox.less';
+@import './module/ant-datepicker.less';
+@import './module/ant-dropdown.less';
+@import './module/ant-form.less';
+@import './module/ant-input-number.less';
+@import './module/ant-input.less';
+@import './module/ant-modal-wrap.less';
+@import './module/ant-table.less';
+@import './module/ant-table-wrapper.less';
+@import './module/ant-tabs-and-list.less';
+@import './module/ant-timepicker.less';
+@import './module/ant-tree.less';
+@import './module/ant-upload.less';
+@import './module/ant-select.less';
+@import './module/ant-notification.less';
+@import './module/ant-popover.less';
+@import './module/ant-radio.less';
+
+/*****************滚动条**************/
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+  width: 4px;
+  height: 1px;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  background: @backgroundDarkColor;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  width: 6px;
+  //-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: @primaryColor;
+}
+
+.anticon {
+  color: @textWhiteColor ;
+}
+
+// 无数据时候显示
+.ant-empty-normal {
+  color: @textColor;
+
+  .ant-empty-description {
+    color: #fff;
+  }
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+// 输入框后面的单位
+.ant-input-number-group-addon {
+  color: @textColor  !important;
+  border-color: @inputBorderColor  !important;
+}
+
+// 暂无数据
+.ant-empty-description {
+  color: @textColor  !important;
+}
+
+// 菜单背景
+.ant-menu-dark {
+  background: none;
+}

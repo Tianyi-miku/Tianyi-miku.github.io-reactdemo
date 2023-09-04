@@ -1,0 +1,36 @@
+import images from "@/assets/images";
+
+/*
+ * @Description:
+ * @Author: zhangyuru
+ * @Date: 2023-03-01 13:54:52
+ * @LastEditors: zhangyuru
+ * @LastEditTime: 2023-08-24 09:42:13
+ * @FilePath: \05-simulation_training_React\src\config\index.ts
+ */
+export type Config = {
+  LoginPath: string; // 默认登录页路由
+  FileUrl: string; // 文件服务器地址（图片等）
+  HttpUrl: string; // 默认http请求地址
+  UploadUrl: string; //上传接口地址
+  encryptMenu: string[]; // 需要用户权限+手动密钥才能访问的加密菜单 sessionStorage __key__ rdst2023
+  menuKey: string; // 超级账号 --- sessionStorage
+  menuPassword: string; // 超级账号密码 --- sessionStorage
+  logoImg: string; // 系统logo图片
+};
+
+const env: any = process.env;
+const IsPro: boolean = env?.NODE_ENV === "production";
+
+const config: Config = {
+  LoginPath: "/home",
+  FileUrl: "/document",
+  HttpUrl: IsPro ? "/api" : "/api",
+  UploadUrl: IsPro ? "/api" : "/api",
+  logoImg: images.Logo,
+  encryptMenu: ["/system/resource"], // 加密菜单
+  menuKey: "__root__", // 超级账号
+  menuPassword: "rdst2023", // 超级账号密码
+};
+
+export default config;

@@ -1,66 +1,80 @@
-import { Outlet } from "react-router-dom"
-import { useState } from "react"
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from "@ant-design/icons"
-import { Menu } from "antd"
-import type { MenuProps } from "antd"
-import DropdownList from "../components/Dropdown/Dropdown"
-import { withRouter } from "../hoc"
-import { HomeSty } from "./style"
-const items: MenuProps["items"] = [
-    {
-        label: "首页",
-        key: "/home/home",
-        icon: <MailOutlined />
-    },
-    {
-        label: "常规监测",
-        key: "/home/routineMon",
-        icon: <AppstoreOutlined />
-    },
-    {
-        label: "监测网管控",
-        key: "/home/networkManage",
-        icon: <SettingOutlined />
-    },
-    {
-        label: "频谱资源管控",
-        key: "/login",
-        icon: <MailOutlined />
-    },
-    {
-        label: "系统配置",
-        key: "/home/sysConfiguration",
-        icon: <SettingOutlined />
-    }
-]
+/*
+ * @Description:
+ * @Author: zhangyuru
+ * @Date: 2023-03-03 10:41:12
+ * @LastEditors: zhangyuru
+ * @LastEditTime: 2023-08-24 17:08:19
+ * @FilePath: \05-simulation_training_React\src\pages\control\index.tsx
+ */
+import React from "react";
+import { Button } from "antd";
+import Head from "@/components/layout/head/head";
+import { Outlet } from "react-router-dom";
+import Footer from "@/components/layout/footer/footer";
+import withRouter, { WithRouterProps } from "@/hooks/withRouter";
+import { useControlCtx, controlCtx, ControlCtx } from "./indexHoc";
+import {
+    FullscreenExitOutlined,
+    FullscreenOutlined,
+} from "@ant-design/icons";
+import "./index.less";
 
-function HomeIndex(props: any) {
-    const [current, setCurrent] = useState(props.router.location.pathname)
+const IndexApp = (props: WithRouterProps) => {
 
-    const onClick: MenuProps["onClick"] = (e) => {
-        setCurrent(e.key)
-        // console.log("click ", e)
-        // setCurrent(e.key)
-        console.log("====================================")
-        console.log(props)
-        console.log("====================================")
-        props.router.navigate(e.key)
-    }
+    const ctx: ControlCtx = useControlCtx();
+    const { showFooter, footerHeight, outletFullScreen } = ctx.state;
+
+    const [navActive, setNavActive] = React.useState<number>(0);
+
+    // 主体内容全屏按钮图标
+    const fullScreenIcon = outletFullScreen ? (
+        <FullscreenExitOutlined />
+    ) : (
+        <FullscreenOutlined />
+    );
+
+    // 动态计算content高度
+    const contentHeight = React.useMemo(() => {
+        if (outletFullScreen) return "calc(100% - 72px)";
+        return `calc(100% - ${showFooter ? footerHeight : 114}px)`;
+    }, [outletFullScreen, showFooter, footerHeight]);
+
+    // 切换主体内容是否全屏
+    const checkedFullScreen = () => {
+        ctx.dispatch.setTableFullScreen(!outletFullScreen);
+    };
+
     return (
-        <HomeSty>
-            <div className="header">
-                <div className="logo">logo无限电监测控制中心</div>
-                <div className="right_con">
-                    <Menu className="menu" onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
-                    <div className="login">
-                        <DropdownList></DropdownList>
-                    </div>
+        <controlCtx.Provider value={ctx}>
+            <div className="layout">
+                {/* Head */}
+                {!outletFullScreen && <Head showMenu></Head>}
+
+                {/* nav */}
+                <div
+                    className={
+                        outletFullScreen ? "layout-nav layout-nav-fullScene" : "layout-nav"
+                    }
+                >
+                    <Button icon={fullScreenIcon} onClick={checkedFullScreen}></Button>
                 </div>
+
+                {/* content */}
+                <div
+                    className={
+                        outletFullScreen
+                            ? "layout-content fullScene-content"
+                            : "layout-content"
+                    }
+                    style={{ height: contentHeight }}
+                >
+                    <Outlet />
+                </div>
+                {/* footer */}
+                {showFooter && !outletFullScreen && <Footer></Footer>}
             </div>
-            <div className="content">
-                <Outlet />
-            </div>
-        </HomeSty>
-    )
-}
-export default withRouter(HomeIndex)
+        </controlCtx.Provider>
+    );
+};
+
+export default withRouter<WithRouterProps>(IndexApp);

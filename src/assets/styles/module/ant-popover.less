@@ -1,0 +1,28 @@
+@import '../themeColor.less';
+
+.ant-popover {
+
+  border: 1px solid rgba(40, 176, 254, 0.2);
+
+  .ant-popover-inner-content {
+    color: @textColor;
+    min-width: 250px;
+  }
+
+  .ant-popover-content {
+    .ant-popover-arrow {
+      display: none;
+    }
+
+    .ant-popover-inner {
+      background-color: @backgroundDarkColor;
+      // background-color: #00000000;
+    }
+  }
+
+  .ant-popover-arrow {
+    .ant-popover-arrow-content {
+      background-color: @backgroundDarkColor;
+    }
+  }
+}

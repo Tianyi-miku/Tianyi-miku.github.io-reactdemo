@@ -1,11 +1,21 @@
-
-import { notification } from "antd";
+/*
+ * @Description:
+ * @Author: zhangyuru
+ * @Date: 2023-03-01 15:15:17
+ * @LastEditors: zhangyuru
+ * @LastEditTime: 2023-08-24 17:09:17
+ * @FilePath: \05-simulation_training_React\src\utils\utils.ts
+ */
+import { UploadProps, notification } from "antd";
 import { NotificationPlacement } from "antd/es/notification/interface";
-import { toType } from "./checkType";
-const _ =require('underscore')
+import { isObj, toType } from "./checkType";
+import config from "@/config";
+import _, { cloneDeep, uniqueId } from "lodash";
+import storage from "@/utils/storage";
+import { UploadPropsTyle, uploadApi } from "@/api/upload/upload";
 
 // 消息通知
-class notificat {
+class Notificat {
   success(
     message?: string,
     description?: string,
@@ -54,7 +64,8 @@ class notificat {
     });
   }
 }
-export const generalNotification = new notificat();
+export const generalNotification = new Notificat();
+export const notificat = generalNotification;
 
 // 去除无效数据(删除对象中的 null和undefined)
 export function removeInvalidData(data: any) {
@@ -86,7 +97,12 @@ export const checkImgPrefix = (str: string): string => {
   if (!str) return "";
   if (!str.includes("group")) return str; // 没有group说明是本地文件
   if (str.includes("http")) return str; // 有http的线上文件直接返回本身
-  return "/document/" + str;
+  if (str.includes("/group")) {
+    str = config.FileUrl + str; // 前面有 / 就不用管
+  } else {
+    str = config.FileUrl + "/" + str; // 没有 / 就给它加上
+  }
+  return str;
 };
 
 /**
@@ -108,7 +124,7 @@ export const getUUID = (): string => {
  * @return { number }
  */
 export const getNumberUUID = (maxLen: number = 10): number => {
-  return +(_.uniqueId() + +new Date()).substring(0, maxLen);
+  return +(uniqueId() + +new Date()).substring(0, maxLen);
 };
 
 // 时间转换(把时间转换成antd需要的格式)
@@ -117,6 +133,7 @@ export function dateFormat(
   isTime: boolean = true,
   isZhtime: boolean = false
 ): string {
+  date = date || new Date().getTime();
   const dat: Date = new Date(date);
   const year = dat.getFullYear();
   const mon =
@@ -138,40 +155,87 @@ export function dateFormat(
 }
 
 /**
- * 一个递归查询树节点的函数
+ * 一个递归 查询/删除/替换 树节点的函数
  * 如果传了新的node 则会把list中找到的对应node替换为新的node，并返回list
  * @return { T | T[] }
  */
-export function deepSearchOrgNode<T>({
+export function deepSearchTreeNode<T>({
   list, // 递归查找的列表
   key, // 递归查找的字段名
-  value, // 递归查找的参数(和key对应)
+  value, // 递归查找的参数 (和key对应)
+  values, // 递归查找的参数集合 (和key对应)
   childKey, // 递归查找的子级字段名
   newNode, // 查找到节点后 需要替换的节点
+  oldNode, // 查找到节点后 需要替换的旧节点
+  isDelete, // 是否删除匹配到的节点
+  setParent, // 设置parent数据
 }: {
   list: T[];
   key: string;
-  value: any;
+  value?: any;
+  values?: any[];
   childKey: string;
-  newNode?: T;
+  newNode?: any;
+  oldNode?: any;
+  isDelete?: boolean;
+  setParent?: Function;
 }) {
-  let result: any = null;
-  let newList = _.clone(list);
+  if (!list.length) {
+    return newNode ? list : null;
+  }
+  const isEdit = !!newNode || isDelete || !!setParent;
+  values = values?.length ? values : value ? [value] : [];
+
+  let strack: any[] = [];
+  let resultNode: any = null;
+  let newList = cloneDeep(list);
+  let isbreak = false;
+
   const deepFunc: Function = (data: T[]) => {
     for (let i = 0; i < data.length; i++) {
-      const item: any = data[i];
-      if (item[key] === value) {
-        if (!newNode) result = item;
-        else data[i] = newNode;
-        return;
+      if (isbreak) break;
+      let item: any = data[i];
+      let parent: any = strack[strack.length - 1];
+      if (setParent && parent && item) {
+        item = setParent(item, parent);
       }
-      const child: T[] = item[childKey] || [];
-      if (child.length > 0) deepFunc(child);
+      if (values?.length) {
+        for (let val of values) {
+          if (item && item[key] === val) {
+            if (!newNode && !isDelete) {
+              resultNode = item;
+            } else if (isDelete) {
+              delete data[i];
+            } else if (newNode) {
+              let index = -1;
+              if (oldNode) {
+                index = data.findIndex((obj: any) => {
+                  return obj[key] === newNode[key];
+                });
+              }
+              data[i] = newNode;
+              if (index > -1) {
+                data[index] = item;
+              }
+              isbreak = true;
+            }
+            break;
+          }
+        }
+      }
+      const child: T[] = item && item[childKey] ? item[childKey] : [];
+      if (child.length > 0) {
+        strack.push(item); // 进栈
+        deepFunc(child);
+      }
+      if (i === data.length - 1) {
+        strack.pop(); // 出栈
+      }
     }
   };
   deepFunc(newList);
 
-  return newNode ? newList : result;
+  return isEdit ? newList : resultNode;
 }
 
 /**
@@ -246,17 +310,17 @@ export function deepExpanded<T>({
 
 /**
  * 判断是否全屏
- * @returns boolean
+ * @return { Boolean }
  */
 export const getFullscreen = (): boolean => {
-  const { width: swidth, height: sheight } = window.screen; //全屏高度
-  const { width, height } = document.body.getBoundingClientRect(); //当前屏幕高度
+  const { width: swidth, height: sheight } = window.screen;
+  const { width, height } = document.body.getBoundingClientRect();
   return swidth === width && sheight === height;
 };
 
 /**
- *  开启关闭全屏
- * @param callback 回调函数
+ * 开启/关闭全屏
+ * @param { Function } callback 回调函数 选传
  */
 export const launchFullScreen = (callback: Function) => {
   const fullscreen = getFullscreen();
@@ -280,33 +344,197 @@ export const launchFullScreen = (callback: Function) => {
 };
 
 //get下载
-export const getDownFilled = (res:any,name:string)=>{
-  let blob = new Blob([res.data], {
-    type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document;charset=utf-8'
-   });
-  let filename = name + '.xlsx';
-  let downloadElement = document.createElement('a');
+export const getDownFilled = (res: any, name: string) => {
+  let blob = new Blob([res.data ? res.data : res], {
+    type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document;charset=utf-8",
+  });
+  let filename = name + ".xlsx";
+  let downloadElement = document.createElement("a");
   let href = window.URL.createObjectURL(blob); //创建下载的链接
-  downloadElement.style.display = 'none';
+  downloadElement.style.display = "none";
   downloadElement.href = href;
-  downloadElement.download =filename ; //下载后文件名
+  downloadElement.download = filename; //下载后文件名
   document.body.appendChild(downloadElement);
   downloadElement.click(); //点击下载
   document.body.removeChild(downloadElement); //下载完成移除元素
   window.URL.revokeObjectURL(href); //释放掉blob对象
-}
+};
 
 // post下载
-export const postDownload = (res:any,name:string) =>{
-  const BLOB = res.data;
+export const postDownload = (res: any, name: string) => {
+  const BLOB = res.data ? res.data : res;
   const fileReader = new FileReader();
-  fileReader.readAsDataURL(BLOB);  //对请求返回的文件进行处理
+  fileReader.readAsDataURL(BLOB); //对请求返回的文件进行处理
   fileReader.onload = (e) => {
-    let a:any = document.createElement('a') ;
-    a.download = name + '.xlsx';
+    let a: any = document.createElement("a");
+    a.download = name + ".xlsx";
     a.href = e.target?.result;
-    document.body.appendChild(a)
+    document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a)
+    document.body.removeChild(a);
+  };
+};
+
+// 打开新窗口
+export const openPage = (url: string) => {
+  url = url.indexOf("/") === 0 ? url : "/" + url;
+  const hrefStr = window.location.href;
+  const path = hrefStr.split("/#")[0];
+  window.open(`${path}/#${url}`, "_blank");
+};
+
+// 字符串json转对象
+export function JsonStrToObj(str: string) {
+  try {
+    return JSON.parse(str);
+  } catch (e: any) {
+    return null;
   }
 }
+
+/**
+ * 时间格式化
+ * @param {string | Date} value
+ * @param {string} fmt
+ * @example
+ *  dateFormat(value, 'yyyy-MM-dd hh:mm:ss')
+ *  dateFormat(value, 'yyyy年MM月dd日 hh时mm分')
+ */
+export const DateFormat = (
+  value: number | string,
+  fmt: string = "yyyy-MM-dd hh:mm:ss"
+) => {
+  if (value) {
+    const getDate =
+      typeof value === "string"
+        ? new Date(value.replace(/-/g, "/"))
+        : new Date(value);
+    const o: any = {
+      "M+": getDate.getMonth() + 1,
+      "d+": getDate.getDate(),
+      "h+": getDate.getHours(),
+      "m+": getDate.getMinutes(),
+      "s+": getDate.getSeconds(),
+      "q+": Math.floor((getDate.getMonth() + 3) / 3),
+      S: getDate.getMilliseconds(),
+    };
+    if (/(y+)/.test(fmt)) {
+      fmt = fmt.replace(
+        RegExp.$1,
+        (getDate.getFullYear() + "").substring(4 - RegExp.$1.length)
+      );
+    }
+    for (const k in o) {
+      if (new RegExp("(" + k + ")").test(fmt)) {
+        fmt = fmt.replace(
+          RegExp.$1,
+          RegExp.$1.length === 1
+            ? o[k]
+            : ("00" + o[k]).substring(("" + o[k]).length)
+        );
+      }
+    }
+    return fmt;
+  }
+};
+
+// 获取url中全部参数的对象
+export function getUrlParams() {
+  // 解决乱码问题
+  let url = decodeURI(window.location.href);
+  let res: any = {};
+  let url_data = _.split(url, "?").length > 1 ? _.split(url, "?")[1] : null;
+  if (!url_data) return null;
+  let params_arr = _.split(url_data, "&");
+  _.forEach(params_arr, function (item) {
+    let key = _.split(item, "=")[0];
+    let value = _.split(item, "=")[1];
+    res[key] = value;
+  });
+  return res;
+}
+
+// 获取坐标位置
+export function getLocation() {
+  let coords;
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position: any) {
+      coords = position.coords;
+    });
+  }
+  return coords;
+}
+
+export const IUploadProps = (data: UploadPropsTyle, select?: Function) => {
+  // 头部框导入配置，用到的时候自行扩展
+  const upload: UploadProps = {
+    name: "file",
+    headers: {
+      token: storage.getToken(),
+      Responsetype: "blob",
+    },
+    data: data?.data,
+    multiple: data?.multiple ? data?.multiple : false,
+    showUploadList: false,
+    customRequest: (file) => customUpload(file, data, select),
+  };
+  return upload;
+};
+
+const customUpload = (file: any, data: UploadPropsTyle, select?: Function) => {
+  let fromData = new FormData();
+  fromData.append("file", file.file);
+  for (const i of Object.keys(data?.data)) {
+    fromData.append(i, data?.data[i]);
+  }
+  uploadApi(data.action, fromData).then((response: any) => {
+      if (response.type === "application/json") {
+        let fileReader = new FileReader();
+        fileReader.onload = function () {
+          try {
+            //@ts-expect-error
+            let jsonData = JSON.parse(fileReader.result); // 说明是普通对象数据，后台转换失败
+            console.log(jsonData);
+            if (jsonData.code === "000000") {
+              generalNotification.success("导入成功", `${jsonData.message}`);
+            } else {
+              generalNotification.error("失败", `${jsonData.message}`);
+            }
+          } catch (err) {
+            generalNotification.error("失败", `解析失败`);
+          }
+        };
+        fileReader.readAsText(response);
+      } else {
+        postDownload(response, "图谱");
+        generalNotification.error("失败", `文件导入失败`);
+      }
+      if (select) {
+        select();
+      }
+    })
+    .catch(() => {
+      generalNotification.error("失败", `文件上传失败`);
+    });
+};
+
+/**
+ * json字符串转换为对象
+ * @param { any } str 入参
+ * @return { object }
+ */
+export const transformObject = (str: any, isArray: boolean = false): any => {
+  if (str instanceof isObj) return str;
+  if (str && /\{((?:.|\r?\n)+?)\}/g.test(str)) {
+    if (typeof str === "string") {
+      const data: any = JSON.parse(str);
+      if (Array.isArray(data) && isArray) {
+        const obj: any = {};
+        data.forEach((i: any) => {
+          obj[i.Key] = i.value;
+        });
+        return obj;
+      } else return data;
+    } else return {};
+  } else return {};
+};

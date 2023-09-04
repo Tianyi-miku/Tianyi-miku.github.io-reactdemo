@@ -1,24 +1,139 @@
-const path = require('path')
-const CracoLessPlugin = require('craco-less')
+/*
+ * @Description: 脚手架配置（最新）
+ * @Author: zhangyuru
+ * @Date: 2023-05-04 17:06:50
+ * @LastEditors: zhangyuru
+ * @LastEditTime: 2023-08-24 17:07:34
+ * @FilePath: \05-simulation_training_React\craco.config.js
+ */
+import path from "path";
+const { getLoader, loaderByName } = require("@craco/craco");
+const CracoLessPlugin = require('craco-less');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
-const resolve = (dir) => path.resolve(__dirname, dir)
+const apis = [
+  '192.168.1.77:8087', // 邹家豪
+  '192.168.110.36:8000', // 测试
+  '192.168.1.182:8087', // 刘志刚
+  '192.168.110.73:8087', // 张亚峰
+  '192.168.1.71:8087', // 陈思宇
+  '192.168.110.36:8000', // 蚌埠测试环境
+]
+const ProxyApiPath = apis[2]
 
 module.exports = {
+  devServer: {
+    port: 3000,
+    open: false,
+    proxy: {
+      "/api": {
+        target: `http://${ProxyApiPath}/`,
+        changeOrigin: true,
+        pathRewrite: { '^/api': '' },
+        ws: false,
+      },
+      // 旧版(vue2)http请求地址
+      "/oldApi": {
+        target: `http://${apis[5]}/`,
+        changeOrigin: true,
+        pathRewrite: { '^/oldApi': '' },
+        ws: false,
+      },
+      // 文件服务器
+      "/document": {
+        target: `http://192.168.1.36:54001`,
+        changeOrigin: true,
+        pathRewrite: { '^/document': '' },
+        ws: false,
+      },
+      // 远端socket （后端已废弃）
+      '/farend': {
+        target: `ws://${ProxyApiPath}/`,
+        changeOrigin: true,
+        pathRewrite: { '^/farend': 'ws' },
+        ws: true,
+      },
+      // 本地终端socket（后端已废弃）
+      '/local': {
+        target: `ws://127.0.0.1:56789/`,
+        changeOrigin: true,
+        pathRewrite: { '^/local': '/ws' },
+        ws: true,
+      },
+      // 本地终端socket (new)
+      '/newlocal': {
+        target: `ws://127.0.0.1:8099/`,
+        changeOrigin: true,
+        pathRewrite: { '^/newlocal': '' },
+        ws: true,
+      },
+    },
+  },
+  webpack: {
+    // 路径别名
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+      '@api': path.resolve(__dirname, 'src/api'),
+      '@pages': path.resolve(__dirname, 'src/pages'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+    },
+    resolve: {
+      // 引入文件忽略后缀名
+      extensions: ['.tsx', '.ts', '.js', '.jsx', '.json', '.less', '.css']
+    },
+    // 配置修改
+    configure: (webpackConfig: any) => {
+      const { isFound, match: babelLoaderMatch } = getLoader(
+        webpackConfig,
+        loaderByName("babel-loader")
+      );
+      // 按需加载antd
+      if (isFound) {
+        babelLoaderMatch.loader.options.plugins.push([
+          "import",
+          { libraryName: "antd", style: true },
+        ]);
+      }
+      // 修改打包输出文件名
+      // webpackConfig.output.path = path.join(__dirname, 'dist' + getDate());
+
+      return webpackConfig;
+    },
+    // 打包优化 
+    plugins: process.env.NODE_ENV === 'production' ? [
+      // 压缩js
+      new UglifyJsPlugin({
+        test: /\.js($|\?)/i, // 正则匹配
+        sourceMap: false, // 是否生成map文件
+        parallel: true, // 开启多线程打包
+        cache: true, // 开启打包缓存
+        uglifyOptions: {
+          warnings: false, // 删除警告
+          compress: {
+            drop_console: true, // 去掉 console.log
+            drop_debugger: true // 去掉 debugger
+          },
+        },
+      }),
+      // 压缩css
+      new OptimizeCSSAssetsPlugin(),
+      // 打包进度
+      new ProgressBarPlugin()
+    ] : [],
+  },
   plugins: [
     {
-      plugin: CracoLessPlugin,
+      plugin: CracoLessPlugin, // less-loader
       options: {
         lessLoaderOptions: {
           lessOptions: {
-            javascriptEnabled: true
-          }
-        }
-      }
-    }
+            modifyVars: { '@primary-color': '#1DA57A' },
+            javascriptEnabled: true,
+          },
+        },
+      },
+    },
   ],
-  webpack: {
-    alias: {
-      '@': resolve('src')
-    }
-  }
-}
+};

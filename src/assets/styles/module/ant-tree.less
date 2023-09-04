@@ -1,0 +1,52 @@
+@import '../themeColor.less';
+
+.ant-tree {
+  background: none;
+  color: #fff;
+  font-size: 16px;
+
+  .ant-tree-switcher {
+    background: none;
+    // margin-top: 4px;
+
+    .anticon {
+      color: @primaryColor;
+    }
+  }
+
+  .ant-tree-node-selected {
+    background: @primaryColor  !important;
+  }
+
+  .ant-tree-node-content-wrapper:hover {
+    background: @backgHoverColor ;
+  }
+
+  .ant-tree-node-selected:hover {
+    background: @primaryColor ;
+  }
+
+  .ant-tree-indent-unit::before {
+    display: none;
+  }
+
+  .ant-tree-title {
+    color: @textWhiteColor;
+  }
+}
+
+.tree_Empty {
+  height: 100%;
+  position: relative;
+
+  .ant-empty {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -45%);
+
+    .ant-empty-description {
+      color: @textColor;
+    }
+  }
+}

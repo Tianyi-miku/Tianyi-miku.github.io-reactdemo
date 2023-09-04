@@ -1,0 +1,46 @@
+@import '../themeColor.less';
+
+//单选按钮
+.ant-radio-wrapper {
+  color: @textColor;
+
+  .ant-radio-disabled {
+    & {
+      opacity: 0.5;
+    }
+
+    +span {
+      color: @textDisableColor;
+    }
+  }
+
+  .ant-radio-inner {
+    & {
+      background: @text162b41Color;
+      border: 2px solid @primaryColor;
+    }
+
+    &::after {
+      top: 2px;
+      left: 2px;
+      background-color: @primaryColor;
+    }
+  }
+}
+
+
+.ant-radio-group {
+  .ant-radio-button-wrapper {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 38px; // 应付招标文档截图 临时改的样式，后面删掉
+    padding-right: 38px; // 应付招标文档截图 临时改的样式，后面删掉
+    background: @text162b41Color;
+    color: @textColor;
+    border-color: @inputBorderColor;
+  }
+
+  .ant-radio-button-wrapper-checked {
+    background: @backgroundLinearColorOpacity;
+  }
+}

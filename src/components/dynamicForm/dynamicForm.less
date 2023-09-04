@@ -1,0 +1,141 @@
+@import '../../assets/styles/themeColor.less';
+
+.buttons {
+  margin-right: 10px;
+}
+
+.ant-form-item-label {
+  line-height: 40px;
+}
+
+.ant-input-affix-wrapper {
+  border-color: #5990fa;
+}
+
+.footerCol {
+  text-align: right;
+  height: 40px;
+}
+
+input {
+  &::placeholder {
+    color: #ffffff90 !important;
+  }
+}
+
+.ant-select-selection-placeholder {
+  color: #ffffff90 !important;
+}
+
+// 文件上传组件 如果组件风格类型是picture 则用自己的样式
+.ant-upload-list-picture {
+  display: none;
+}
+
+.my_filelist {
+  box-sizing: border-box;
+  border: 1px solid #43ACFA;
+  border-radius: 4px;
+  background: #050b16;
+  position: relative;
+  height: 40px;
+
+  img {
+    width: auto !important;
+    height: 30px;
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .iconfont {
+    color: @textColor;
+    display: block;
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+  }
+
+  .anticon {
+    font-size: 14px;
+    cursor: pointer;
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .img_url_text {
+    color: @textColor;
+    position: absolute;
+    top: 50%;
+    left: 40px;
+    transform: translateY(-50%);
+    height: 38px;
+    line-height: 38px;
+  }
+
+  .icon-fileicon {
+    cursor: pointer;
+    color: #43ACFA;
+  }
+
+  .not_url_text {
+    color: @textColor;
+    text-align: center;
+    height: 38px;
+    line-height: 38px;
+  }
+}
+
+.ant-upload-wrapper {
+  display: block;
+  width: 100%;
+
+  .ant-upload {
+    width: 100%;
+  }
+}
+
+// 上传组件 切换输入
+.uploadSupInput {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+
+  button {
+    width: 94px;
+    height: 40px;
+  }
+
+  .uploadBtn {
+    flex: 1;
+  }
+}
+
+// 显示右侧按钮时的样式
+.flexCol {
+  display: flex;
+
+  .ant-form-item {
+    flex: 1;
+    padding-left: 19px;
+
+    .ant-form-item-control {
+      margin-left: 4px;
+    }
+  }
+}
+
+// 表单按钮
+.formItemBtn {
+  width: 100%;
+  background: @backgroundDarkColor;
+  color: @textColor;
+  margin-left: 0 !important;
+}

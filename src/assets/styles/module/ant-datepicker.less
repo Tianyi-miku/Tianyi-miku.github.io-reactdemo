@@ -1,0 +1,93 @@
+@import '../themeColor.less';
+
+.ant-picker-range {
+  background: @backgroundDarkColor;
+  height: 40px;
+
+  .ant-picker-input>input {
+    color: @textWhiteColor  !important;
+
+    &::placeholder {
+      color: #ffffff90 !important;
+    }
+  }
+}
+
+.ant-picker-status-error {
+  background: @inputBgColor  !important;
+}
+
+// 时间选择
+.ant-picker {
+  background: @inputBgColor;
+  border-color: @primaryColor;
+  border-radius: 4px;
+  padding: 4px 11px 4px;
+  height: 40px;
+}
+
+.ant-picker-range .ant-picker-clear {
+  border-radius: 15px;
+  background: @backgroundDarkColor;
+}
+
+.ant-picker-panel-container .ant-picker-panels {
+  background: @backgroundDarkColor ;
+  color: @textWhiteColor ;
+
+  .ant-picker-cell .ant-picker-cell-inner {
+    color: @textWhiteColor;
+  }
+
+  .ant-picker-date-panel .ant-picker-content th {
+    color: @textWhiteColor;
+  }
+
+  .ant-picker-header-view {
+    color: @textWhiteColor;
+  }
+
+  .ant-picker-header>button {
+    color: @textWhiteColor;
+  }
+
+  .ant-picker-cell-in-view.ant-picker-cell-in-range::before {
+    color: @textWhiteColor;
+    background: @backgroundDarkColor  !important;
+  }
+
+  .ant-picker-cell::before {
+    height: 0;
+  }
+}
+
+.ant-picker-time-panel-cell {
+  color: @textWhiteColor;
+}
+
+:where(.css-dev-only-do-not-override-10ed4xt).ant-picker-dropdown .ant-picker-time-panel-column>li.ant-picker-time-panel-cell-selected .ant-picker-time-panel-cell-inner {
+  color: @primaryColor  !important;
+}
+
+:where(.css-dev-only-do-not-override-10ed4xt).ant-picker-dropdown .ant-picker-time-panel-column>li.ant-picker-time-panel-cell .ant-picker-time-panel-cell-inner {
+  color: @textWhiteColor;
+}
+
+.ant-picker-cell:hover:not(.ant-picker-cell-in-view) .ant-picker-cell-inner,
+.ant-picker-cell:hover:not(.ant-picker-cell-selected):not(.ant-picker-cell-range-start):not(.ant-picker-cell-range-end):not(.ant-picker-cell-range-hover-start):not(.ant-picker-cell-range-hover-end) .ant-picker-cell-inner {
+  background: @primaryColor;
+}
+
+.ant-picker-dropdown .ant-picker-time-panel-column>li.ant-picker-time-panel-cell-selected .ant-picker-time-panel-cell-inner {
+  color: @textWhiteColor  !important;
+}
+
+.ant-picker-time-panel-cell-selected {
+  .ant-picker-time-panel-cell-inner {
+    background: #496cfa !important;
+  }
+}
+
+.ant-picker-time-panel-cell-inner {
+  color: #fff !important;
+}

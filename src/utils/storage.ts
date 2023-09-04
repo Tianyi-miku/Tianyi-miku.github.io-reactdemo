@@ -1,34 +1,58 @@
-import Store from "store"
+/*
+ * @Description:
+ * @Author: zhangyuru
+ * @Date: 2023-03-01 14:32:09
+ * @LastEditors: zhangyuru
+ * @LastEditTime: 2023-04-17 17:00:59
+ * @FilePath: \05-simulation_training_React\src\utils\storage.ts
+ */
+import { User } from "@/store/modules/user";
+import Store from "store";
 
-const ACCESS_TOKEN = "Access-Token"
+const USER_KEY: string = "USER_KEY";
+const ACCESS_TOKEN = "Access-Token";
 
-interface StorageType {
-  [x: string]: Function
-}
+type Storage = {
+  [x: string]: Function;
+  setToken: Function;
+  getToken: Function;
+  removeToken: Function;
+  setUserInfo: Function;
+  getUserInfo: Function;
+  removeUserInfo: Function;
+  clear: Function;
+};
 
-const storage:StorageType = {
-    // 保存token
-    setToken(token: string) {
-        Store.set(ACCESS_TOKEN, token) 
-    },
-    // 获取token
-    getToken() {
-        return Store.get(ACCESS_TOKEN) || ""
-    },
-    // 移除token
-    removeToken() {
-        Store.remove(ACCESS_TOKEN)
-    },
-    // 清除所有本地存储
-    removeAll() {
-        Store.clearAll()
-    },
-    // 遍历所有存储
-    getForEachAll() {
-        return Store.each((val,index) => {
-            console.log(val,'===',index)
-        })
-    }
-}
+const storage: Storage = {
+  // 保存token
+  setToken(token: string) {
+    Store.set(ACCESS_TOKEN, token);
+  },
+  
+  // 获取token
+  getToken() {
+    return Store.get(ACCESS_TOKEN) || "";
+  },
+  // 移除token
+  removeToken() {
+    Store.remove(ACCESS_TOKEN);
+  },
+  // 保存用户信息
+  setUserInfo(data: User) {
+    Store.set(USER_KEY, data);
+  },
+  // 获取用户信息
+  getUserInfo() {
+    return Store.get(USER_KEY);
+  },
+  // 删除用户信息
+  removeUserInfo() {
+    Store.remove(USER_KEY);
+  },
+  // 清空所有
+  clear() {
+    Store.clearAll();
+  },
+};
 
-export default storage
+export default storage;

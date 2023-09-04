@@ -1,0 +1,36 @@
+.empty {
+  height: 100%;
+}
+
+.empty:empty::after {
+  // content: "暂无数据";
+  content: "";
+  background: url(../images/control/nodata.svg) no-repeat center;
+  background-size: 50%;
+  display: block;
+  text-align: center;
+  height: 100%;
+}
+
+.uploadBtn {
+  margin: 0 !important;
+}
+
+// 禁止图片 文字 选中
+.default_select {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+
+// span标签用a标签样式
+.span-a {
+  cursor: pointer;
+  color: #1677ff;
+
+  &:hover {
+    color: #66adfb;
+  }
+}
