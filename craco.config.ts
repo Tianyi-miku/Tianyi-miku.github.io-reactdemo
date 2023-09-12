@@ -14,14 +14,9 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const apis = [
-  '192.168.1.77:8087', // 邹家豪
-  '192.168.110.36:8000', // 测试
-  '192.168.1.182:8087', // 刘志刚
-  '192.168.110.73:8087', // 张亚峰
-  '192.168.1.71:8087', // 陈思宇
-  '192.168.110.36:8000', // 蚌埠测试环境
+  '192.168.1.10:5000', //云
 ]
-const ProxyApiPath = apis[2]
+const ProxyApiPath = apis[0]
 
 module.exports = {
   devServer: {
@@ -34,40 +29,12 @@ module.exports = {
         pathRewrite: { '^/api': '' },
         ws: false,
       },
-      // 旧版(vue2)http请求地址
-      "/oldApi": {
-        target: `http://${apis[5]}/`,
-        changeOrigin: true,
-        pathRewrite: { '^/oldApi': '' },
-        ws: false,
-      },
       // 文件服务器
       "/document": {
         target: `http://192.168.1.36:54001`,
         changeOrigin: true,
         pathRewrite: { '^/document': '' },
         ws: false,
-      },
-      // 远端socket （后端已废弃）
-      '/farend': {
-        target: `ws://${ProxyApiPath}/`,
-        changeOrigin: true,
-        pathRewrite: { '^/farend': 'ws' },
-        ws: true,
-      },
-      // 本地终端socket（后端已废弃）
-      '/local': {
-        target: `ws://127.0.0.1:56789/`,
-        changeOrigin: true,
-        pathRewrite: { '^/local': '/ws' },
-        ws: true,
-      },
-      // 本地终端socket (new)
-      '/newlocal': {
-        target: `ws://127.0.0.1:8099/`,
-        changeOrigin: true,
-        pathRewrite: { '^/newlocal': '' },
-        ws: true,
       },
     },
   },

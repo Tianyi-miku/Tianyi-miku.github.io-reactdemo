@@ -50,9 +50,9 @@ class HttpRequest {
       // 登录拦截
       const token = this.oldToken || storage.getToken(); // 优先取传入的token
       config.headers["token"] = token;
-      if (!options?.unCheckLogin && !token) {
-        config.cancelToken = HttpRequest.cancelToken(config.url); // 取消请求
-      }
+      // if (!options?.unCheckLogin && !token) {
+      //   config.cancelToken = HttpRequest.cancelToken(config.url); // 取消请求
+      // }
       // 重复请求拦截
       if (options.url === this.oldUrl && config.method === this.oldMethod) {
         // 可能在一段时间内重复请求 如果间隔时间内 则不再请求

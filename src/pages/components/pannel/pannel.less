@@ -1,0 +1,44 @@
+.pannel {
+  overflow: hidden;
+  transition: all .4s;
+
+  .pannel-title {
+    height: 34px;
+    text-align: center;
+    line-height: 34px;
+    font-weight: bold;
+    background-size: 100% 100% !important;
+
+    .iconfont {
+      position: absolute;
+      right: 10px;
+      color: #ffffff50;
+      font-weight: normal;
+      font-size: 24px;
+      animation: flash 2s infinite;
+      -webkit-animation: flash 2s infinite;
+    }
+
+    .left {
+      // left: 10px;
+      right: auto;
+    }
+  }
+
+  .cursor-default {
+    cursor: default;
+  }
+
+  .childrenbox {
+    height: 100%;
+  }
+
+  .hideChildrenbox {
+    visibility: hidden;
+    overflow: hidden;
+  }
+
+  .showBox {
+    height: 100%;
+  }
+}

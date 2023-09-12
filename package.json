@@ -49,6 +49,7 @@
     "uglifyjs-webpack-plugin": "^2.2.0"
   },
   "devDependencies": {
+    "@types/bmapgl": "^0.0.7",
     "@types/react-cookies": "^0.1.0",
     "babel-plugin-import": "^1.13.6",
     "craco-less": "^2.0.0"

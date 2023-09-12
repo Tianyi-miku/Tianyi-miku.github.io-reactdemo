@@ -51,13 +51,13 @@ const IndexApp = (props: WithRouterProps) => {
                 {!outletFullScreen && <Head showMenu></Head>}
 
                 {/* nav */}
-                <div
+                {/* <div
                     className={
                         outletFullScreen ? "layout-nav layout-nav-fullScene" : "layout-nav"
                     }
                 >
                     <Button icon={fullScreenIcon} onClick={checkedFullScreen}></Button>
-                </div>
+                </div> */}
 
                 {/* content */}
                 <div
