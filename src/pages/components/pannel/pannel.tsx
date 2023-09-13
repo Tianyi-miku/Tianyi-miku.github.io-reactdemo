@@ -48,7 +48,7 @@ const Pannel = (props: Props, ref: any) => {
   return (
     <div
       ref={ref}
-      className={`pannel default_select ${className}`}
+      className={`pannel animate__fadeInDown ${className}`}
     >
       <div
         className={hideIcon ? "pannel-title cursor-default" : "pannel-title"}

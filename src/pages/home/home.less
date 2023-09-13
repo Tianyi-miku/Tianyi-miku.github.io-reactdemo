@@ -2,6 +2,10 @@
 @infow: 400px;
 @headh: 114px;
 
+.ant-input {
+  background-color: rgba(119, 119, 119, 0.2) !important;
+}
+
 // 西安首页
 .home {
   width: 100vw;
@@ -11,6 +15,15 @@
   top: 0;
   left: 0;
   z-index: 0;
+
+  //搜索
+  .searchInput {
+    position: absolute;
+    top: @headh;
+    left: 420px;
+    right: 470px;
+    z-index: 9;
+  }
 
   // 地图容器
   .mapBox {
@@ -35,7 +48,8 @@
     position: absolute;
     padding-left: 20px;
     z-index: 10;
-    padding-top: @headh;
+    margin-top: @headh;
+    height: 80vh;
 
     // 设备列表
     .state-equ {
@@ -49,8 +63,8 @@
         padding: 20px;
 
         .task-info {
-          height: 60px;
-          line-height: 60px;
+          height: 40px;
+          line-height: 40px;
           background: url(../../assets/images/home/taskbg1.png) no-repeat center;
           background-size: 100% 100%;
           margin-bottom: 20px;
@@ -78,31 +92,11 @@
         }
 
       }
-
-
     }
 
     .state-echarts {
       height: 240px;
     }
-  }
-
-  .rightButton {
-    position: absolute;
-    right: 0;
-    padding-top: @headh;
-    top: 0;
-    color: @textColor;
-    z-index: 10;
-    padding-right: 20px;
-    display: flex;
-    flex-flow: column;
-    width: 40px;
-
-    :where(.css-dev-only-do-not-override-nnuwmp).ant-badge {
-      color: @textColor
-    }
-
   }
 
   .rightBox {
@@ -111,10 +105,130 @@
     margin-right: 40px;
     height: 80vh;
     background: @layoutbgcolor1;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
-    z-index: 10;
+    z-index: 20;
+
+    .baseInfo {
+      display: flex;
+      padding: 10px;
+      padding-top: 20px;
+      justify-content: space-between;
+
+
+      .base {
+        font-size: 20px;
+      }
+
+      .base_more {
+        font-size: 12px;
+        display: flex;
+        align-items: flex-end;
+        cursor: pointer;
+      }
+
+      .base_more:hover {
+        color: @primaryColor;
+      }
+
+    }
+
+    .warninfo {
+      display: flex;
+      justify-content: space-between;
+
+      .temperature {
+        width: 48%;
+        height: 200px;
+        background: url(../../assets/images/home/equ-statebg5.png) no-repeat center;
+        background-size: 100% 100%;
+        text-align: center;
+        cursor: pointer;
+        color: #bccef3;
+        position: relative;
+        padding-top: 32%;
+        font-weight: bold;
+        font-size: 18px;
+
+        &::after {
+          content: '';
+          width: 80px;
+          height: 55px;
+          position: absolute;
+          top: 22%;
+          left: 50%;
+          transform: translateX(-50%);
+          background: url(../../assets//images/control/stuUrl/doing.png) no-repeat center;
+          background-size: 100% 100%;
+        }
+      }
+
+      .humidness {
+        width: 48%;
+        height: 200px;
+        background: url(../../assets/images/home/equ-statebg5.png) no-repeat center;
+        background-size: 100% 100%;
+        text-align: center;
+        cursor: pointer;
+        color: #bccef3;
+        position: relative;
+        padding-top: 32%;
+        font-weight: bold;
+        font-size: 18px;
+
+        &::after {
+          content: '';
+          width: 80px;
+          height: 55px;
+          position: absolute;
+          top: 22%;
+          left: 50%;
+          transform: translateX(-50%);
+          background: url(../../assets//images/control/stuUrl/opreUrl.png) no-repeat center;
+          background-size: 100% 100%;
+        }
+      }
+    }
+
+    .monitoring {
+      border-radius: 10px;
+      height: 300px;
+      border: solid 1px @inputBorderColor; // 输入框边框线;
+      margin: 10px;
+    }
+
+    .forewarning {
+      margin: auto;
+      padding: 10px;
+      text-align: center;
+
+      .warning_item {
+        padding-top: 10px;
+        height: auto;
+
+        .forewarning_Text {
+          font-size: 16px;
+          overflow: hidden;
+          white-space: pre-wrap;
+          text-overflow: ellipsis;
+          color: #ff4d4f;
+          font-family: -moz-initial;
+          font-weight: bold;
+        }
+
+        .forewarning_Button {
+          display: flex;
+          justify-content: flex-end;
+          width: 100%;
+
+          .buttonClass {
+            margin-right: 10px;
+          }
+        }
+
+      }
+    }
   }
 
   .realtime {

@@ -1,17 +1,30 @@
-import { ClockCircleOutlined } from '@ant-design/icons';
-import { Badge } from 'antd';
 import React from 'react'
+import "./rightButton.less"
+import { Badge } from 'antd';
+
+type BadgeType = {
+  title: string;
+  count: number;
+}
 
 type PropType = {
   onclickFuntion: Function;
-  title: string;
+  badges?: Array<BadgeType>;
 }
 
 const RightButton = (prop: PropType) => {
   return (
-    <Badge count={<ClockCircleOutlined />}>
-      <span onClick={() => prop.onclickFuntion(prop.title)}>{prop.title}</span>
-    </Badge>
+    <div className="rightButton">
+      {
+        prop.badges?.map((item) => {
+          return <div key={item.title} className='badgeContent'>
+            <Badge count={item.count}>
+              <div className='badgeTitle' onClick={() => prop.onclickFuntion(item.title)}>{item.title}</div>
+            </Badge>
+          </div>
+        })
+      }
+    </div>
   )
 }
 

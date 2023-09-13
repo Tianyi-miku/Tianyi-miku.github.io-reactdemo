@@ -1,6 +1,7 @@
 import React from 'react'
 import Pannel from '../components/pannel/pannel'
 import "./deviceDetails.less"
+import BasicInformation from '../components/basicInformation/basicInformation'
 
 export default function deviceDetails() {
   return (
@@ -10,6 +11,7 @@ export default function deviceDetails() {
           title={'站点信息'}
           className="state-equ"
         >
+        <BasicInformation></BasicInformation>
         </Pannel>
       </div>
     </div>

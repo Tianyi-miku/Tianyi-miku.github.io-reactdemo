@@ -23,6 +23,7 @@ import "@/assets/font/index.less";
 import "animate.css/animate.min.css";
 import "@/assets/styles/common.less";
 import { Suspense } from "react";
+import "default-passive-events"
 
 
 dayjs.locale("zh-cn");

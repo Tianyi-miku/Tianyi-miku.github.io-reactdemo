@@ -1,0 +1,33 @@
+@import '../../assets/styles/themeColor.less';
+
+/*地图标题 infoWindow*/
+.BMap_bubble_title {
+  color: #fff !important;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: left;
+  background: transparent !important;
+}
+
+.BMap_bubble_pop {
+  background: @backgroundLinearColor !important;
+  color: @textWhiteColor;
+  border: none !important;
+}
+
+.BMap_bubble_content {
+  color: #fff !important;
+}
+
+
+/*下面箭头替换为自己本地修改过的*/
+// img[src="http://webmap0.bdimg.com/image/api/iw_tail.png"] {
+//   width: auto !important;
+//   height: auto !important;
+//   content: url('../../assets/images/map/arrow.png');
+// }
+
+img[src="http://webmap0.bdimg.com/image/api/iw_tail.png"] {
+  content: url('../../assets/images/map/arrow.png');
+  content-visibility: hidden;
+}
