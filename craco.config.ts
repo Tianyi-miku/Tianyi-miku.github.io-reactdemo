@@ -14,7 +14,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const apis = [
-  '192.168.1.10:5000', //云
+  '192.168.1.182:8089', 
 ]
 const ProxyApiPath = apis[0]
 
@@ -35,6 +35,13 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: { '^/document': '' },
         ws: false,
+      },
+      // 远端socket 
+      '/farend': {
+        target: `ws://${ProxyApiPath}/`,
+        changeOrigin: true,
+        pathRewrite: { '^/farend': 'ws' },
+        ws: true,
       },
     },
   },

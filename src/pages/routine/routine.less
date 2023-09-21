@@ -1,6 +1,7 @@
 @import '../../assets/styles/themeColor.less';
 @infow: 400px;
 @headh: 114px;
+
 .routine {
   width: 100vw;
   height: 100vh;
@@ -40,12 +41,183 @@
     // 设备列表
     .state-equ {
       cursor: pointer;
+      text-indent: 30px;
 
       .iconfont {
         right: 4px;
       }
 
+      &-info {
+        margin-top: 10px;
+        background: url('../../assets/images/home/equ-statebg3.png') no-repeat center;
+        background-size: 100% 100%;
+        margin-bottom: 6px;
+        padding: 6px 8px;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .equ-info {
+        padding: 0 !important;
+        text-indent: 8px;
+        padding: 5px 15px;
+        font-size: 14px;
+        height: 30px;
+        line-height: 30px;
+        background: @backgroundLinearColor1;
+        color: @textLightColor;
+        margin-bottom: 4px;
+        width: 100%;
+        position: relative;
+
+        &::after {
+          content: '';
+          width: 4px;
+          height: 30px;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        .info-label {
+          margin-right: 4px;
+          font-weight: bold;
+        }
+
+        .info-value {
+          color: #deedf8;
+        }
+
+        .info_icon {
+          float: right;
+        }
+      }
+
+      .w100 {
+        width: 100%;
+      }
+
+      .equ-btns {
+        text-align: center;
+        text-indent: 0;
+        background: @backgroundLinearColor1;
+        width: 100%;
+        padding: 4px 0;
+
+        button {
+          margin: 0 10px;
+          background: url(../../assets/images/control/boxbg6.png) no-repeat center;
+          background-size: 100% 100%;
+        }
+      }
     }
+
+  }
+
+  .rightBox {
+    width: @infow;
+    margin-top: @headh;
+    margin-right: 40px;
+    height: 80vh;
+    background: @layoutbgcolor1;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 20;
+
+    .baseInfo {
+      display: flex;
+      padding: 10px;
+      padding-top: 20px;
+      justify-content: space-between;
+
+
+      .base {
+        font-size: 20px;
+      }
+
+      .base_more {
+        font-size: 12px;
+        display: flex;
+        align-items: flex-end;
+        cursor: pointer;
+      }
+
+      .base_more:hover {
+        color: @primaryColor;
+      }
+
+    }
+
+    .description {
+      padding: 10px;
+    }
+
+    .warninfo {
+      display: flex;
+      justify-content: space-between;
+
+      .temperature {
+        width: 48%;
+        height: 200px;
+        background: url(../../assets/images/home/equ-statebg5.png) no-repeat center;
+        background-size: 100% 100%;
+        text-align: center;
+        cursor: pointer;
+        color: #bccef3;
+        position: relative;
+        padding-top: 32%;
+        font-weight: bold;
+        font-size: 18px;
+
+        &::after {
+          content: '';
+          width: 80px;
+          height: 55px;
+          position: absolute;
+          top: 22%;
+          left: 50%;
+          transform: translateX(-50%);
+          background: url(../../assets//images/control/stuUrl/doing.png) no-repeat center;
+          background-size: 100% 100%;
+        }
+      }
+
+      .humidness {
+        width: 48%;
+        height: 200px;
+        background: url(../../assets/images/home/equ-statebg5.png) no-repeat center;
+        background-size: 100% 100%;
+        text-align: center;
+        cursor: pointer;
+        color: #bccef3;
+        position: relative;
+        padding-top: 32%;
+        font-weight: bold;
+        font-size: 18px;
+
+        &::after {
+          content: '';
+          width: 80px;
+          height: 55px;
+          position: absolute;
+          top: 22%;
+          left: 50%;
+          transform: translateX(-50%);
+          background: url(../../assets//images/control/stuUrl/opreUrl.png) no-repeat center;
+          background-size: 100% 100%;
+        }
+      }
+    }
+
+    .monitoring {
+      border-radius: 10px;
+      height: 300px;
+      border: solid 1px @inputBorderColor; // 输入框边框线;
+      margin: 10px;
+    }
+
+
   }
 
 }

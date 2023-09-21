@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 // import Map from "../scenes/components/Map/Map";
 import "./home.less";
 import BaiduMap from "@/components/BaiduMap/BaiduMap";
-import { useGetstations } from "@/api/home/home";
 import { useDidMount } from "@/hooks/period";
 import Pannel from "../components/pannel/pannel";
 import titleBg from "@/assets/images/home/scene-title.png";
@@ -12,9 +11,13 @@ import BasicInformation from "../components/basicInformation/basicInformation";
 import { useNavigate } from "react-router-dom";
 import { Col, Empty, Row, Tooltip, Button, Skeleton, Space, Input } from "antd";
 import MeDialog from "@/components/MeDialog/MeDialog";
+import { useDispatch, useSelector } from "react-redux";
+import { Store } from "@/store";
+import { setStations } from "@/store/modules/station";
+import { useGetAllstaion } from "@/api/public";
 
 
-type BoxChildren = {
+export type BoxChildren = {
     title: string;
     children: any
 }
@@ -31,14 +34,13 @@ type Task = {
 }
 
 const Home = () => {
-    const [getList] = useGetstations()
-    const [station, setStation] = useState([])  //所有标注
+    const [getList] = useGetAllstaion() //所有站
     const didMount = useDidMount();
     const navigate = useNavigate()
 
-    const [isShowRinghtBox, setisShowRinghtBox] = useState(false)  //右边的信息是否展示
-    const [pannelData, setpannelData] = useState({} as BoxChildren)  //站点信息
-
+    const [pannelData, setpannelData] = useState(Object)  //站点信息
+    const [rightbadges, setrightbadges] = useState(Object) //右侧按钮是哪一个
+    const [markshow, setMarkshow] = useState(false) //mark 展示还是不展示
     //右侧按钮
     const [badges, setBadges] = useState([{
         title: '站点信息',
@@ -47,6 +49,10 @@ const Home = () => {
         title: "告警信息",
         count: 3
     }])
+    const [isShowRinghtBox, setisShowRinghtBox] = useState(false)  //右边的信息是否展示
+
+    const station = useSelector((state: Store) => state.station).stations
+    const dispatch = useDispatch()
 
     //警告信息
     const [forewarning, setForewarning] = useState([
@@ -66,39 +72,43 @@ const Home = () => {
 
     useEffect(() => {
         if (didMount) {
-            setStation([{
-                position: new BMapGL.Point(104.07, 30.653739),
-                icon: `blue${1}`,
-                id: 1       //图标
-            }] as any)
-            getList('', (resData: Array<any>) => {
-                if (resData && resData.length > 0) {
-                    resData.forEach((item: any, key: number) => {
+            getList('', (resData: any) => {
+                const data = resData.data
+                if (data && data.length > 0) {
+                    data.forEach((item: any, key: number) => {
                         item.position = new BMapGL.Point(item.longitude + key, item.latitude)
                         item.icon = `blue${key + 1}`           //图标
                     })
-                    console.log(resData);
-
-                    setStation(resData as any)
+                    dispatch(setStations(data))
                 }
-            },
-            )
+            })
         }
         return () => {
         }
-    }, [getList, didMount])
+    }, [getList, didMount, dispatch])
 
-    const setRight = (name: string) => {
-        if (pannelData?.title === name && isShowRinghtBox) {
+    const setRight = (item: any) => {
+        if (isShowRinghtBox && item.title === rightbadges.title) {
             setisShowRinghtBox(false);
             return
         } else {
+            if (item.title === "告警信息") {
+            }
+            setrightbadges(item)
             setisShowRinghtBox(true);
         }
-        setpannelData({
-            ...pannelData,
-            title: name
-        })
+    }
+
+    const openButton = (data: any) => {
+        setpannelData(data);
+        setrightbadges(badges[0]);
+        setisShowRinghtBox(true)
+        //是否打开mark
+        setMarkshow(true)
+    }
+
+    const closeButton = () => {
+        setisShowRinghtBox(false)
     }
 
 
@@ -179,7 +189,11 @@ const Home = () => {
                 </Pannel>
             </div>
             <div className="centerBox mapBox">
-                <BaiduMap station={station} showInfoWindow={true}></BaiduMap>
+                <BaiduMap station={station} onclickMarkOpen={openButton} onclickMarkClose={closeButton}
+                    center={pannelData.position}
+                    markshow={markshow}
+                    setMarkshow={setMarkshow}
+                    info={pannelData}></BaiduMap>
             </div>
             <div className="searchInput">
                 <Search
@@ -188,13 +202,12 @@ const Home = () => {
                     enterButton
                 ></Search>
             </div>
-            <div>
-                <RightButton badges={badges} onclickFuntion={setRight}></RightButton>
-            </div>
+            {isShowRinghtBox && <RightButton badges={badges} onclickFuntion={setRight}></RightButton>}
+
             {isShowRinghtBox &&
                 <div className="rightBox">
-                    <Pannel title={pannelData?.title}>
-                        {pannelData?.title === '站点信息' &&
+                    <Pannel title={rightbadges?.title}>
+                        {rightbadges?.title === '站点信息' &&
                             <>
                                 <div className="baseInfo">
                                     <div className="base">基本信息</div>
@@ -214,13 +227,13 @@ const Home = () => {
                                 </div>
                             </>
                         }
-                        {pannelData?.title === '告警信息' && <>
+                        {rightbadges?.title === '告警信息' && <>
                             <div className="baseInfo">
                                 <div className="base">监测预警（3）</div>
                                 <div className="base_more">更多</div>
                             </div>
                             <div className="forewarning">
-                                {forewarning.map((item, index) => {
+                                {forewarning?.map((item, index) => {
                                     return <Row className="warning_item" key={index}>
                                         <Col span={12}>
                                             <Tooltip title={item.title} placement='topLeft'>
@@ -236,14 +249,14 @@ const Home = () => {
                                         </Col>
                                     </Row>
                                 })}
-                                {forewarning.length === 0 && <Empty></Empty>}
+                                {forewarning?.length === 0 && <Empty></Empty>}
                             </div>
                             <div className="baseInfo">
                                 <div className="base">环境预警（4）</div>
                                 <div className="base_more">更多</div>
                             </div>
                             <div className="forewarning">
-                                {environmentwarning.map((item, index) => {
+                                {environmentwarning?.map((item, index) => {
                                     return <Row className="warning_item" key={index}>
                                         <Col span={16}>
                                             <Tooltip title={item.title} placement='left'>
@@ -256,7 +269,7 @@ const Home = () => {
                                         </Col>
                                     </Row>
                                 })}
-                                {environmentwarning.length === 0 && <Empty></Empty>}
+                                {environmentwarning?.length === 0 && <Empty></Empty>}
                             </div>
                         </>}
                     </Pannel>

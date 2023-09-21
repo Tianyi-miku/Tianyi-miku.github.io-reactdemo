@@ -488,31 +488,31 @@ const customUpload = (file: any, data: UploadPropsTyle, select?: Function) => {
     fromData.append(i, data?.data[i]);
   }
   uploadApi(data.action, fromData).then((response: any) => {
-      if (response.type === "application/json") {
-        let fileReader = new FileReader();
-        fileReader.onload = function () {
-          try {
-            //@ts-expect-error
-            let jsonData = JSON.parse(fileReader.result); // 说明是普通对象数据，后台转换失败
-            console.log(jsonData);
-            if (jsonData.code === "000000") {
-              generalNotification.success("导入成功", `${jsonData.message}`);
-            } else {
-              generalNotification.error("失败", `${jsonData.message}`);
-            }
-          } catch (err) {
-            generalNotification.error("失败", `解析失败`);
+    if (response.type === "application/json") {
+      let fileReader = new FileReader();
+      fileReader.onload = function () {
+        try {
+          //@ts-expect-error
+          let jsonData = JSON.parse(fileReader.result); // 说明是普通对象数据，后台转换失败
+          console.log(jsonData);
+          if (jsonData.code === "000000") {
+            generalNotification.success("导入成功", `${jsonData.message}`);
+          } else {
+            generalNotification.error("失败", `${jsonData.message}`);
           }
-        };
-        fileReader.readAsText(response);
-      } else {
-        postDownload(response, "图谱");
-        generalNotification.error("失败", `文件导入失败`);
-      }
-      if (select) {
-        select();
-      }
-    })
+        } catch (err) {
+          generalNotification.error("失败", `解析失败`);
+        }
+      };
+      fileReader.readAsText(response);
+    } else {
+      postDownload(response, "图谱");
+      generalNotification.error("失败", `文件导入失败`);
+    }
+    if (select) {
+      select();
+    }
+  })
     .catch(() => {
       generalNotification.error("失败", `文件上传失败`);
     });

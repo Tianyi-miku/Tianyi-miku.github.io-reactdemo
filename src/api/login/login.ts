@@ -19,27 +19,6 @@ export type LoginParams = {
   // seatCode?: string;
 };
 
-// 导调登录
-export function useLoginGuideHttp() {
-  return useHttp((params: LoginParams) => {
-    return Http.Post({
-      url: urls.login.LoginGuide,
-      data: params,
-      unCheckLogin: true, // 不校验登录状态
-    });
-  });
-}
-
-// 作业登录
-export function useLoginWorkHttp() {
-  return useHttp((params: LoginParams) => {
-    return Http.Post({
-      url: urls.login.LoginWork,
-      data: params,
-      unCheckLogin: true, // 不校验登录状态
-    });
-  });
-}
 
 // 退出登录
 export function useLogoutHttp() {

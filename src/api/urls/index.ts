@@ -9,10 +9,12 @@
 import loginUrls from "./loginUrls";
 import publicUrls from "./publicUrls";
 import homeUrls from "./homeUrl";
+import routineUrls from "./routine";
 
 const Urls = {
   ...publicUrls,
   ...homeUrls,
+  ...routineUrls,
   login: loginUrls,
 };
 

@@ -1,8 +1,20 @@
 import BaiduMap from '@/components/BaiduMap/BaiduMap'
 import React from 'react'
 import Pannel from '../components/pannel/pannel'
+import BasicInformation from '../components/basicInformation/basicInformation'
+import { useNavigate } from 'react-router'
+import "./coverageRate.less"
+import { Button } from 'antd'
+import Icon from '@/components/Icon/Icon'
 
-export default function coverageRate() {
+const CoverageRate = () => {
+
+  const navigate = useNavigate()
+
+  const goMore = () => {
+    navigate('/deviceDetails')
+  }
+
   const pointList = [
     { lng: 104.07, lat: 30.291358, count: 110 },
     { lng: 103.53063, lat: 30.281342, count: 280 },
@@ -12,7 +24,6 @@ export default function coverageRate() {
     { lng: 103.554157, lat: 30.242994, count: 200 },
     { lng: 103.56005, lat: 30.244599, count: 250 },
     { lng: 103.590664, lat: 30.255036, count: 70 },
-
   ]
 
   const heatmapList: MapVGL.GeoJSON[] = pointList.map(item => {
@@ -32,9 +43,38 @@ export default function coverageRate() {
       <div className="home-state">
         <Pannel
           title={'监测覆盖率'}
-          // titleBgImg={titleBg}
           className="state-equ"
         >
+          <div className="task">
+            <div className="task-info">
+              <span className="info-label">业务频段:</span>
+              <span className="info-value">40-60</span>
+            </div>
+            <div className="task-info">
+              <span className="info-label">自定义频段:</span>
+              <span className="info-value">50-55</span>
+            </div>
+            <div className="task-info">
+              <span className="info-label">台站功率:</span>
+              <span className="info-value">40-45</span>
+            </div>
+          </div>
+
+          <div className="baseInfo">
+            <div className="base">历史记录</div>
+            <div className="base_more" onClick={() => goMore()}>更多</div>
+          </div>
+          <div className='history'>
+
+          </div>
+          <Button className="analyze">
+            <Icon
+              icon="add-task"
+              color="#33d0f1"
+              style={{ marginRight: "6px" }}
+            />
+            分析
+          </Button>
         </Pannel>
       </div>
       <div className="centerBox mapBox">
@@ -43,3 +83,5 @@ export default function coverageRate() {
     </div>
   )
 }
+
+export default CoverageRate

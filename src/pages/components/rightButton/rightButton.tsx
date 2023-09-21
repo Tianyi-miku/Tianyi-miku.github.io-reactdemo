@@ -19,7 +19,7 @@ const RightButton = (prop: PropType) => {
         prop.badges?.map((item) => {
           return <div key={item.title} className='badgeContent'>
             <Badge count={item.count}>
-              <div className='badgeTitle' onClick={() => prop.onclickFuntion(item.title)}>{item.title}</div>
+              <div className='badgeTitle' onClick={() => prop.onclickFuntion(item)}>{item.title}</div>
             </Badge>
           </div>
         })

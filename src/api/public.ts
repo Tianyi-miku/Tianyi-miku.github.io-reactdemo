@@ -43,3 +43,23 @@ export function useNotice() {
     });
   });
 }
+
+
+// 获取所有站
+export function useGetAllstaion() {
+  return useHttp(() => {
+    return Http.Get({
+      url: urls.station.allstation,
+    });
+  });
+}
+
+
+// 获取单个站下功能参数
+export function useGetstaion() {
+  return useHttp((code: number) => {
+    return Http.Get({
+      url: urls.station.onlystation + code,
+    });
+  });
+}

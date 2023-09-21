@@ -1,36 +1,34 @@
 import React, { useState } from 'react'
-import { Map, Marker, InfoWindow, ZoomControl, DrawingManager, MapvglLayer, MapvglView } from 'react-bmapgl';
+import { Map, Marker, InfoWindow, ZoomControl, DrawingManager, MapvglLayer, MapvglView, mapvgl } from 'react-bmapgl';
 import { styleJson } from "./mapStyleJson";
 import { IMarker } from '@/pages/home/home';
 import "./BaiduMap.less"
 
 type MapProp = {
   station?: Array<IMarker>; //所有点标注
-  showInfoWindow?: boolean; //是否展示标注的信息 info
-  IsetShowInfoWindow?: Function;
   onclickMap?: Function; //单击地图方法
   ZoomControl?: boolean; //放大缩小按钮
   DrawingManager?: boolean; //工具栏
   showHeatmap?: boolean; //热力图
   heatmapList?: Array<MapVGL.GeoJSON>; //热力图数组，不传默认marker position
+  onclickMarkOpen?: Function //单击标注打开右侧按钮
+  onclickMarkClose?: Function //关闭右侧按钮
+  center?: any //中心点
+  markshow?: boolean //是否打开mark
+  setMarkshow?: Function
+  info?: any
 }
 
-type Info = {
-  position: any;
-  text: string;
-  title: string;
-}
 
 export default function BaiduMap(prop: MapProp) {
 
   const [heatmapGeoJSON, setHeatmapGeoJSON] = useState([])
-  const [info, setInfo] = useState({} as Info)
-  const [show, setShow] = useState(false)
+
 
   const defaultStyle = {
     styleJson: styleJson
   }
-  const point = new BMapGL.Point(104.07, 30.653739)
+  const point = prop.center || new BMapGL.Point(104.07, 30.653739) || ''
   const zoom = 11
 
   if (prop.showHeatmap && !prop.heatmapList) {
@@ -61,16 +59,15 @@ export default function BaiduMap(prop: MapProp) {
   </div>`
 
   const open = (value: any) => {
-    setInfo({
-      position: value.position,
-      text: '1',
-      title: '2'
-    })
-    setShow(true)
+    prop.setMarkshow ? prop.setMarkshow(true) : console.log('打开mark');
+    // 赋值！
+    // prop.onclickMark(value)
+    prop.onclickMarkOpen ? prop.onclickMarkOpen(value, prop.markshow) : console.log('这里传值和方法！');
   }
 
   const close = () => {
-    setShow(false)
+    prop.setMarkshow ? prop.setMarkshow(false) : console.log('关闭mark');
+    prop.onclickMarkClose ? prop.onclickMarkClose() : console.log('没有方法执行');
   }
 
   return (
@@ -90,10 +87,10 @@ export default function BaiduMap(prop: MapProp) {
         return <Marker key={item.id} position={item.position} icon={item.icon} onClick={() => open(item)} />
       })}
       {/* @ts-expect-error */}
-      {prop.showInfoWindow && show && <InfoWindow
-        position={info?.position || point}
-        text={info?.text || InfoWindowText}
-        title={info?.text || '标题'}
+      {prop.markshow && <InfoWindow
+        position={prop.info?.position || point}
+        text={prop.info?.address  || InfoWindowText}
+        title={prop.info?.name || '标题'}
         onClickclose={close}
         onClose={close}
       >

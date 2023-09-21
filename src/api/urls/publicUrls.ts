@@ -21,6 +21,10 @@ const publicUrls: PublicUrls = {
   other: {
     notice: "/notice", // 获取通知列表 || 获取通知详情
   },
+  station: {
+    allstation: '/station/allSimpleVo', //获取所有站基本信息集合
+    onlystation: '/station/' //单个站
+  }
 };
 
 type PublicUrls = {
@@ -35,6 +39,10 @@ type PublicUrls = {
   other: {
     notice: string;
   };
+  station: {
+    allstation: string;
+    onlystation: string;
+  }
 };
 
 export default publicUrls;

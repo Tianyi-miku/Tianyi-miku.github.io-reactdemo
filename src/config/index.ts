@@ -17,6 +17,10 @@ export type Config = {
   menuKey: string; // 超级账号 --- sessionStorage
   menuPassword: string; // 超级账号密码 --- sessionStorage
   logoImg: string; // 系统logo图片
+  IsPro: boolean; // 是否生产环境
+  IsDev: boolean; // 是否开发环境
+  wsReconnectNum: number, //ws本地连几次中断
+  SingeWss: string,
 };
 
 const env: any = process.env;
@@ -31,6 +35,10 @@ const config: Config = {
   encryptMenu: ["/system/resource"], // 加密菜单
   menuKey: "__root__", // 超级账号
   menuPassword: "rdst2023", // 超级账号密码
+  IsPro: IsPro, // 是否生产环境
+  IsDev: !IsPro, // 是否开发环境
+  wsReconnectNum: 3,
+  SingeWss: `ws://${location.host}/farend/task`,
 };
 
 export default config;

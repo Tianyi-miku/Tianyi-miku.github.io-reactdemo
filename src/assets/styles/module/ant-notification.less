@@ -32,11 +32,11 @@
   color: @textWhiteColor;
 
   border-radius: @ant-notification-border-radius;
-  background: @primaryColor;
+  background: @backgroundLinearColorOpacity !important;
 
-  .ant-notification-notice-icon {
-    background: @backgroundDarkColor;
-  }
+  // .ant-notification-notice-icon {
+  //   background: @backgroundDarkColor !important;
+  // }
 
   &.success {
     svg {
@@ -87,7 +87,7 @@
       display: block;
       margin: 4px 4px 0 57px;
       padding: 15px 0 0px 23px;
-      background: @backgroundDarkColor ;
+      // background: @backgroundLinearColorOpacity !important;
       color: @textColor ;
       font-size: 18px;
       font-weight: 500;
@@ -98,7 +98,8 @@
       display: block;
       padding: 2px 0 10px 23px;
       margin: 0 4px 4PX 57px;
-      background: @backgroundDarkColor ;
+      // background: @backgroundDarkColor ;
+      color: @textColor;
       font-size: 14px;
       border-bottom-right-radius: 6px;
     }
