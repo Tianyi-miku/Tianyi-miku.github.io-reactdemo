@@ -26,7 +26,7 @@ const BasicInformation = (prop: baseProp) => {
         <Col span={12}>
           <div className='baseItem'>
             <div className='left'>
-              监测范围
+              范围
             </div>
             <div className='right'>{prop.pannelData?.category}</div>
           </div>
@@ -34,7 +34,7 @@ const BasicInformation = (prop: baseProp) => {
         <Col span={12}>
           <div className='baseItem'>
             <div className='left'>
-              测向范围
+              范围
             </div>
             <div className='right'>{prop.pannelData?.direction}</div>
           </div>
