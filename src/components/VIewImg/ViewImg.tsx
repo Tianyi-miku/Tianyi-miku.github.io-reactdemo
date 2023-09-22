@@ -1,12 +1,3 @@
-/*
- * @Description:文件预览组件
-  插件文档地址：https://react-photo-view.vercel.app/docs/api
- * @Author: zhangyuru
- * @Date: 2023-03-16 11:52:39
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-07-03 14:22:24
- * @FilePath: \05-simulation_training_React\src\components\ViewImg\ViewImg.tsx
- */
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
 import { checkImgPrefix } from "@/utils/utils";

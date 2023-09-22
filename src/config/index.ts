@@ -1,13 +1,5 @@
 import images from "@/assets/images";
 
-/*
- * @Description:
- * @Author: zhangyuru
- * @Date: 2023-03-01 13:54:52
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-08-24 09:42:13
- * @FilePath: \05-simulation_training_React\src\config\index.ts
- */
 export type Config = {
   LoginPath: string; // 默认登录页路由
   FileUrl: string; // 文件服务器地址（图片等）
@@ -34,7 +26,7 @@ const config: Config = {
   logoImg: images.Logo,
   encryptMenu: ["/system/resource"], // 加密菜单
   menuKey: "__root__", // 超级账号
-  menuPassword: "rdst2023", // 超级账号密码
+  menuPassword: "shkymiku2023", // 超级账号密码
   IsPro: IsPro, // 是否生产环境
   IsDev: !IsPro, // 是否开发环境
   wsReconnectNum: 3,

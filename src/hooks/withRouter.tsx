@@ -1,11 +1,3 @@
-/*
- * @Description:
- * @Author: zhangyuru
- * @Date: 2023-03-31 17:33:16
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-04-04 17:31:42
- * @FilePath: \05-simulation_training_React\src\hooks\withRouter.tsx
- */
 import { useSearchParams } from "react-router-dom";
 import { useLocation, useNavigate, useParams } from "react-router";
 

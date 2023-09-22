@@ -1,11 +1,3 @@
-/*
- * @Description:
- * @Author: zhangyuru
- * @Date: 2023-03-01 14:32:09
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-04-17 17:00:59
- * @FilePath: \05-simulation_training_React\src\utils\storage.ts
- */
 import { User } from "@/store/modules/user";
 import Store from "store";
 

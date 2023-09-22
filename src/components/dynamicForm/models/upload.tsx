@@ -10,7 +10,7 @@ import { checkImgPrefix, generalNotification } from "@/utils/utils";
 import { Uploads } from "../dynamicFormType";
 import config from "@/config";
 import urls from "@/api/urls";
-import ViewImg from "@/components/ViewImg/ViewImg";
+import ViewImg from "@/components/VIewImg/ViewImg";
 import storage from "@/utils/storage";
 import { dynamicFormContext } from "@/components/dynamicForm/dynamicForm";
 import Icon from "@/components/Icon/Icon";

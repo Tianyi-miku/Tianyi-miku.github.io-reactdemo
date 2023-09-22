@@ -1,11 +1,3 @@
-/*
- * @Description: 自定义类型检测
- * @Author: zhangyuru
- * @Date: 2023-03-01 14:24:38
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-03-01 14:24:50
- * @FilePath: \05-simulation_training_React\src\utils\checkType.ts
- */
 /**
  * @description: 判断是否是数组
  * @event: 用法： xxx instanceof isArray

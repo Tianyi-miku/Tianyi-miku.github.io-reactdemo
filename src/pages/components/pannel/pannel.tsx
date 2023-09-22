@@ -1,11 +1,4 @@
-/*
- * @Description:
- * @Author: zhangyuru
- * @Date: 2023-06-16 10:24:45
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-08-22 17:21:27
- * @FilePath: \05-simulation_training_React\src\pages\scenes\components\pannel\pannel.tsx
- */
+
 // import defaultImg from "@/assets/images/map/scene-title1.png";
 import defaultImg from "@/assets/images/map/scene-title.png";
 import Icon from "@/components/Icon/Icon";

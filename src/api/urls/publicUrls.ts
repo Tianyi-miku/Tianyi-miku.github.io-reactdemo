@@ -1,11 +1,3 @@
-/*
- * @Description:公共接口
- * @Author: zhangyuru
- * @Date: 2023-04-19 09:50:10
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-04-19 10:35:28
- * @FilePath: \05-simulation_training_React\src\api\urls\publicUrls.ts
- */
 const publicUrls: PublicUrls = {
   // 字典管理
   dic: {
@@ -21,10 +13,6 @@ const publicUrls: PublicUrls = {
   other: {
     notice: "/notice", // 获取通知列表 || 获取通知详情
   },
-  station: {
-    allstation: '/station/allSimpleVo', //获取所有站基本信息集合
-    onlystation: '/station/' //单个站
-  }
 };
 
 type PublicUrls = {
@@ -39,10 +27,6 @@ type PublicUrls = {
   other: {
     notice: string;
   };
-  station: {
-    allstation: string;
-    onlystation: string;
-  }
 };
 
 export default publicUrls;

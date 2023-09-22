@@ -1,11 +1,3 @@
-/*
- * @Description:
- * @Author: zhangyuru
- * @Date: 2023-03-02 15:55:57
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-07-26 09:32:02
- * @FilePath: \05-simulation_training_React\src\components\MeDialog\MeDialogType.ts
- */
 export type propsType = {
   visiable: boolean; // 显示隐藏弹出框
   width?: string; //弹出框宽度 默认为 500px  传值为"宽度px"

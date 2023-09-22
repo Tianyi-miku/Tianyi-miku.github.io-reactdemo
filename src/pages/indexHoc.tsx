@@ -1,11 +1,3 @@
-/*
- * @Description: 导调控制首页-hoc
- * @Author: zhangyuru
- * @Date: 2023-03-14 18:01:15
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-04-27 09:53:04
- * @FilePath: \05-simulation_training_React\src\pages\control\indexHoc.tsx
- */
 import { useMemo, useState, createContext } from "react";
 
 // 上下文对象

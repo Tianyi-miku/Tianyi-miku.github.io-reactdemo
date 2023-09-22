@@ -6,7 +6,7 @@ import { Http } from "@/utils/axios";
 export function useGetstations() {
   return useHttp((params: any) => {
     return Http.Get({
-      url: urls.stations,
+      url: '',
       data: params,
     });
   });

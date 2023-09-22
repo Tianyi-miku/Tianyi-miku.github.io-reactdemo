@@ -1,11 +1,3 @@
-/*
- * @Description:
- * @Author: zhangyuru
- * @Date: 2023-03-02 15:55:57
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-07-26 09:47:37
- * @FilePath: \05-simulation_training_React\src\components\MeDialog\MeDialog.tsx
- */
 import React, { memo } from "react";
 import { Button } from "antd";
 import { propsType } from "./MeDialogType";

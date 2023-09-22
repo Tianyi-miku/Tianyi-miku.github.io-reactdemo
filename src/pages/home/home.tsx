@@ -14,7 +14,6 @@ import MeDialog from "@/components/MeDialog/MeDialog";
 import { useDispatch, useSelector } from "react-redux";
 import { Store } from "@/store";
 import { setStations } from "@/store/modules/station";
-import { useGetAllstaion } from "@/api/public";
 
 
 export type BoxChildren = {
@@ -34,7 +33,6 @@ type Task = {
 }
 
 const Home = () => {
-    const [getList] = useGetAllstaion() //所有站
     const didMount = useDidMount();
     const navigate = useNavigate()
 
@@ -72,20 +70,11 @@ const Home = () => {
 
     useEffect(() => {
         if (didMount) {
-            getList('', (resData: any) => {
-                const data = resData.data
-                if (data && data.length > 0) {
-                    data.forEach((item: any, key: number) => {
-                        item.position = new BMapGL.Point(item.longitude + key, item.latitude)
-                        item.icon = `blue${key + 1}`           //图标
-                    })
-                    dispatch(setStations(data))
-                }
-            })
+
         }
         return () => {
         }
-    }, [getList, didMount, dispatch])
+    }, [didMount, dispatch])
 
     const setRight = (item: any) => {
         if (isShowRinghtBox && item.title === rightbadges.title) {
@@ -229,7 +218,7 @@ const Home = () => {
                         }
                         {rightbadges?.title === '告警信息' && <>
                             <div className="baseInfo">
-                                <div className="base">监测预警（3）</div>
+                                <div className="base">预警（3）</div>
                                 <div className="base_more">更多</div>
                             </div>
                             <div className="forewarning">

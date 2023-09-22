@@ -1,11 +1,3 @@
-/*
- * @Description:
- * @Author: zhangyuru
- * @Date: 2023-03-01 16:35:56
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-08-24 14:45:07
- * @FilePath: \05-simulation_training_React\src\components\dynamicForm\models\swich.tsx
- */
 import React from "react";
 import {
   InputNumber,

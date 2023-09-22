@@ -21,7 +21,7 @@ export default function Head(props: Props) {
             <li></li>
           </ul>
           <h3 className="a-header-title">
-            <span>电磁频谱管理控制系统</span>
+            <span>管理控制系统</span>
           </h3>
           <ul className="header-icon-box-right">
             <li></li>

@@ -1,11 +1,3 @@
-/*
- * @Description:函数组件中 自定义的生命周期钩子
- * @Author: zhangyuru
- * @Date: 2023-03-17 09:40:41
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-04-04 16:17:52
- * @FilePath: \05-simulation_training_React\src\hooks\period.ts
- */
 import { useCallback, useEffect, useState } from "react";
 
 // 模拟生命周期的初次挂载

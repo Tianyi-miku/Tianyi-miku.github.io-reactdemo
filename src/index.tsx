@@ -1,11 +1,4 @@
-/*
- * @Description: 入口文件
- * @Author: zhangyuru
- * @Date: 2023-02-28 09:46:01
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-08-31 17:08:28
- * @FilePath: \05-simulation_training_React\src\index.tsx
- */
+
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import store from "./store";

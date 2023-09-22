@@ -1,11 +1,3 @@
-/*
- * @Description:
- * @Author: zhangyuru
- * @Date: 2023-03-01 15:15:17
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-08-24 17:09:17
- * @FilePath: \05-simulation_training_React\src\utils\utils.ts
- */
 import { UploadProps, notification } from "antd";
 import { NotificationPlacement } from "antd/es/notification/interface";
 import { isObj, toType } from "./checkType";

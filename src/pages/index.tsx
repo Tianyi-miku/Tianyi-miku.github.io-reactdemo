@@ -1,11 +1,3 @@
-/*
- * @Description:
- * @Author: zhangyuru
- * @Date: 2023-03-03 10:41:12
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-08-24 17:08:19
- * @FilePath: \05-simulation_training_React\src\pages\control\index.tsx
- */
 import React from "react";
 import { Button } from "antd";
 import Head from "@/components/layout/head/head";

@@ -42,20 +42,20 @@ const CoverageRate = () => {
     <div className='routine'>
       <div className="home-state">
         <Pannel
-          title={'监测覆盖率'}
+          title={'覆盖率'}
           className="state-equ"
         >
           <div className="task">
             <div className="task-info">
-              <span className="info-label">业务频段:</span>
+              <span className="info-label">业务:</span>
               <span className="info-value">40-60</span>
             </div>
             <div className="task-info">
-              <span className="info-label">自定义频段:</span>
+              <span className="info-label">自定义:</span>
               <span className="info-value">50-55</span>
             </div>
             <div className="task-info">
-              <span className="info-label">台站功率:</span>
+              <span className="info-label">功率:</span>
               <span className="info-value">40-45</span>
             </div>
           </div>

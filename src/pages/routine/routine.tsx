@@ -7,7 +7,6 @@ import RightButton from '../components/rightButton/rightButton'
 import Icon from '@/components/Icon/Icon'
 import BasicInformation from '../components/basicInformation/basicInformation'
 import { useNavigate } from 'react-router-dom'
-import { useGetAllstaion, useGetstaion } from '@/api/public'
 import { useDidMount } from '@/hooks/period'
 
 const Routine = () => {
@@ -26,28 +25,17 @@ const Routine = () => {
     count: 3
   }])
   const [isShowRinghtBox, setisShowRinghtBox] = useState(false)  //右边的信息是否展示
-  const [getList] = useGetAllstaion() //所有站
-  const [getOne] = useGetstaion()   //单个站功能
   const didMount = useDidMount();
   const [oneStation, setoneStation] = useState(Object)
 
 
   useEffect(() => {
     if (didMount) {
-      getList('', (resData: any) => {
-        const data = resData.data
-        if (data && data.length > 0) {
-          data.forEach((item: any, key: number) => {
-            item.position = new BMapGL.Point(item.longitude + key, item.latitude)
-            item.icon = `blue${key + 1}`           //图标
-          })
-        }
-        setstation(data)
-      })
+
     }
     return () => {
     }
-  }, [didMount, getList])
+  }, [didMount])
 
 
   const setRight = (item: any) => {
@@ -55,11 +43,6 @@ const Routine = () => {
       setisShowRinghtBox(false);
       return
     } else {
-      if (item.title === "功能面板") {
-        getOne(pannelData.id, (resData: any) => {
-          setoneStation(resData.data)
-        })
-      }
       setrightbadges(item)
       setisShowRinghtBox(true);
     }

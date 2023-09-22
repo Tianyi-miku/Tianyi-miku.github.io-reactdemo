@@ -1,12 +1,3 @@
-/*
- * @Description:
- * @Author: zhangyuru
- * @Date: 2023-03-14 18:01:15
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-04-20 11:06:50
- * @FilePath: \05-simulation_training_React\src\components\UserHead\Notice\Notices.tsx
- */
-import { useNotice } from "@/api/public";
 import { setNotice } from "@/store/modules/notice";
 import type { Store } from "@/store";
 import { BellOutlined } from "@ant-design/icons";
@@ -18,7 +9,6 @@ import "./Notices.less";
 
 const Notice = () => {
   const dispatch = useDispatch();
-  const [onGetNotice, resData] = useNotice();
   const noticeState = useSelector((s: Store) => s.notice);
   const notice = noticeState.notice;
 
@@ -29,17 +19,6 @@ const Notice = () => {
     redMap = notice.filter((item: any) => item.readState);
     noReadMap = notice.filter((item: any) => !item.readState);
   }
-
-  const didMount = useDidMount();
-
-  useEffect(() => {
-    if (!resData && didMount) {
-      // onGetNotice();
-    }
-    if (resData) {
-      dispatch(setNotice(resData.data));
-    }
-  }, [resData, didMount, dispatch, onGetNotice]);
 
   const items: TabsProps["items"] = [
     {

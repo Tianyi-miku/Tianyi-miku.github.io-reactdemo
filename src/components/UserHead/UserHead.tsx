@@ -1,11 +1,3 @@
-/*
- * @Description:头部用户信息组件
- * @Author: zhangyuru
- * @Date: 2023-03-06 17:45:07
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-08-30 18:13:24
- * @FilePath: \05-simulation_training_React\src\components\UserHead\UserHead.tsx
- */
 import React, { memo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { Store } from "@/store";
@@ -21,7 +13,7 @@ import { setUserInfo } from "@/store/modules/user";
 import storage from "@/utils/storage";
 import config from "@/config";
 import Notice from "./Notice/Notices";
-import ViewImg from "../ViewImg/ViewImg";
+import ViewImg from "../VIewImg/ViewImg";
 import { getFullscreen, launchFullScreen } from "@/utils/utils";
 import "./UserHead.less";
 

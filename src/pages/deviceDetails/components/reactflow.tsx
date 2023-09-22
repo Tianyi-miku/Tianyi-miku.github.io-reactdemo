@@ -8,28 +8,28 @@ const initialNodes: any = [
     id: '1',
     type: 'input',
     data: {
-      label: '工控机',
+      label: '总控',
     },
     position: { x: 250, y: 50 },
   },
   {
     id: '2',
     data: {
-      label: '监测设备',
+      label: '设备1',
     },
     position: { x: 100, y: 140 },
   },
   {
     id: '3',
     data: {
-      label: '测向设备',
+      label: '设备2',
     },
     position: { x: 400, y: 140 },
   },
   {
     id: '4',
     data: {
-      label: '环控设备',
+      label: '设备3',
     },
     position: { x: 600, y: 140 },
   },
@@ -37,7 +37,7 @@ const initialNodes: any = [
     id: '5',
     type: 'output',
     data: {
-      label: '监测天线1',
+      label: '天线1',
     },
     position: { x: 20, y: 340 },
   },
@@ -45,7 +45,7 @@ const initialNodes: any = [
     id: '6',
     type: 'output',
     data: {
-      label: '监测天线2',
+      label: '天线2',
     },
     position: { x: 200, y: 340 },
   },
@@ -53,7 +53,7 @@ const initialNodes: any = [
     id: '7',
     type: 'output',
     data: {
-      label: '监测天线3',
+      label: '天线3',
     },
     position: { x: 450, y: 340 },
   },
@@ -61,7 +61,7 @@ const initialNodes: any = [
     id: '8',
     type: 'output',
     data: {
-      label: '监测天线4',
+      label: '天线4',
     },
     position: { x: 650, y: 340 },
   },

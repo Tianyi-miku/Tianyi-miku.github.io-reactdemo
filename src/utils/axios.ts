@@ -1,11 +1,3 @@
-/*
- * @Description: axios二次封装
- * @Author: zhangyuru
- * @Date: 2023-03-01 11:59:09
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-08-01 14:36:17
- * @FilePath: \05-simulation_training_React\src\utils\axios.ts
- */
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import appConfig from "@/config/index";
 import storage from "./storage";

@@ -1,11 +1,4 @@
-/*
- * @Description: 脚手架配置（最新）
- * @Author: zhangyuru
- * @Date: 2023-05-04 17:06:50
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-08-24 17:07:34
- * @FilePath: \05-simulation_training_React\craco.config.js
- */
+
 import path from "path";
 const { getLoader, loaderByName } = require("@craco/craco");
 const CracoLessPlugin = require('craco-less');
@@ -14,7 +7,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const apis = [
-  '192.168.1.182:8089', 
+  '', 
 ]
 const ProxyApiPath = apis[0]
 
@@ -31,17 +24,10 @@ module.exports = {
       },
       // 文件服务器
       "/document": {
-        target: `http://192.168.1.36:54001`,
+        target: `http://${ProxyApiPath}`,
         changeOrigin: true,
         pathRewrite: { '^/document': '' },
         ws: false,
-      },
-      // 远端socket 
-      '/farend': {
-        target: `ws://${ProxyApiPath}/`,
-        changeOrigin: true,
-        pathRewrite: { '^/farend': 'ws' },
-        ws: true,
       },
     },
   },

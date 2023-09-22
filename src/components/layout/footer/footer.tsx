@@ -71,38 +71,11 @@ const FooterApp = (props: WithRouterProps) => {
       ),
     },
     {
-      label: "常规监测",
-      key: "/routine",
-      icon: (
-        <span>
-          <img src={images.examTest} alt="" />
-        </span>
-      ),
-    },
-    {
-      label: "监测覆盖率",
-      key: "/coverageRate",
-      icon: (
-        <span>
-          <img src={images.misControl} alt="" />
-        </span>
-      ),
-    },
-    {
       label: "设备详情",
       key: "/deviceDetails",
       icon: (
         <span>
           <img src={images.resultManage} alt="" />
-        </span>
-      ),
-    },
-    {
-      label: "系统管理",
-      key: "/system",
-      icon: (
-        <span>
-          <img src={images.systemManage} alt="" />
         </span>
       ),
     },

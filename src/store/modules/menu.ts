@@ -1,11 +1,3 @@
-/*
- * @Description:
- * @Author: zhangyuru
- * @Date: 2023-04-20 10:38:31
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-07-27 15:53:42
- * @FilePath: \05-simulation_training_React\src\store\modules\menu.ts
- */
 import config from "@/config";
 import { deepSearchTreeNode } from "@/utils/utils";
 import { createSlice } from "@reduxjs/toolkit";

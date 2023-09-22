@@ -1,11 +1,3 @@
-/*
- * @Description:
- * @Author: zhangyuru
- * @Date: 2023-03-01 16:35:56
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-04-20 11:02:48
- * @FilePath: \05-simulation_training_React\src\store\modules\user.ts
- */
 import { createSlice } from "@reduxjs/toolkit";
 
 // 用户信息

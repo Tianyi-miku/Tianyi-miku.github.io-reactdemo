@@ -1,17 +1,6 @@
-/*
- * @Description:文件从这里集中引入，后续重复的图片使用场景，可以节省很多引入步骤
- * @Author: zhangyuru
- * @Date: 2023-03-06 10:22:29
- * @LastEditors: zhangyuru
- * @LastEditTime: 2023-08-07 17:00:42
- * @FilePath: \05-simulation_training_React\src\assets\images\index.ts
- */
-
 import Bottag from "../icons/svg/bot-tag.svg";
 import evaluation from "./control/stuUrl/evaluation.png";
 import navTitle from "./control/application/nav-title.png";
-import Logo from "@/assets/images/control/logo.png";
-import LogoMini from "@/assets/images/control/logo-mini.png";
 import MaxBgImg from "@/assets/images/control/background.png";
 
 import Headimg from "@/assets/images/control/headimg.svg";
@@ -91,8 +80,6 @@ type Images = {
   [x: string]: any;
 };
 export default {
-  Logo, // logo图片
-  LogoMini, // logo图标
   Bottag,
   evaluation,
   navTitle,
