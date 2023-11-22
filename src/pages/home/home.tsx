@@ -14,6 +14,7 @@ import MeDialog from "@/components/MeDialog/MeDialog";
 import { useDispatch, useSelector } from "react-redux";
 import { Store } from "@/store";
 import { setStations } from "@/store/modules/station";
+import czzIconOn from '@/assets/images/map/czz-online.svg';
 
 
 export type BoxChildren = {
@@ -49,7 +50,35 @@ const Home = () => {
     }])
     const [isShowRinghtBox, setisShowRinghtBox] = useState(false)  //右边的信息是否展示
 
-    const station = useSelector((state: Store) => state.station).stations
+    // const station = useSelector((state: Store) => state.station).stations 
+    const siteIcon = useMemo(() => {
+        return new BMapGL.Icon(czzIconOn, new BMapGL.Size(36, 35), {
+            imageSize: new BMapGL.Size(36, 35)
+        })
+    }, [])
+    const station = useMemo(() => {
+        return [
+            {
+                id: '001',
+                position: { lng: 113.284335, lat: 23.18829 },
+                icon: siteIcon
+            },
+            {
+                id: '002', position: { lng: 114.283149, lat: 25.1881565 },
+                icon: siteIcon
+            }
+        ]
+    }, [siteIcon])
+
+
+    useEffect(() => {
+        setpannelData(station[0])
+        return () => {
+        }
+    }, [station])
+
+
+
     const dispatch = useDispatch()
 
     //警告信息
@@ -121,6 +150,15 @@ const Home = () => {
     const onSearch = () => {
         //过滤之后setMarker
     }
+
+    const GroupItems = [{
+        id: '001', position: { lng: 113.284335, lat: 23.18829 },
+        category: { key: 'Team', value: '开幕式保障小组' }, state: { key: 'Online', value: '在线' },
+        info: {
+            groupLeader: '张某', member: ['李某', '王某'], task: '开幕式场馆用频保障任务',
+            equipment: ['手持式无线电监测设备', '快速部署式无线电监测设备']
+        }
+    }]
 
     return (
         <div className="home">

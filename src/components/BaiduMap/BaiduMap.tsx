@@ -5,7 +5,7 @@ import { IMarker } from '@/pages/home/home';
 import "./BaiduMap.less"
 
 type MapProp = {
-  station?: Array<IMarker>; //所有点标注
+  station?: Array<any>; //所有点标注
   onclickMap?: Function; //单击地图方法
   ZoomControl?: boolean; //放大缩小按钮
   DrawingManager?: boolean; //工具栏
