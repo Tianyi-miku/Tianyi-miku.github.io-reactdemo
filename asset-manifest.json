@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Tianyi-miku.github.io-reactdemo/static/css/main.8e6a631f.css",
-    "main.js": "/Tianyi-miku.github.io-reactdemo/static/js/main.eb55673f.js",
+    "main.css": "/Tianyi-miku.github.io-reactdemo/static/css/main.637ffa4b.css",
+    "main.js": "/Tianyi-miku.github.io-reactdemo/static/js/main.80f14ccf.js",
     "static/media/dynamic2.gif": "/Tianyi-miku.github.io-reactdemo/static/media/dynamic2.b6d425cc47fd06a4f81e.gif",
     "static/media/xingqiu.svg": "/Tianyi-miku.github.io-reactdemo/static/media/xingqiu.6bba209a3a8bfea15e307a0dc39dc310.svg",
     "static/media/background.png": "/Tianyi-miku.github.io-reactdemo/static/media/background.25ba9341e73173460146.png",
@@ -49,6 +49,7 @@
     "static/media/loginbg.svg": "/Tianyi-miku.github.io-reactdemo/static/media/loginbg.b19ce91811751a9f1207dc6c223aee31.svg",
     "static/media/openExam.svg": "/Tianyi-miku.github.io-reactdemo/static/media/openExam.9b43e8b75deada31fa9cbe230edc37fa.svg",
     "static/media/nodata.svg": "/Tianyi-miku.github.io-reactdemo/static/media/nodata.03202cd9ece61be37306.svg",
+    "static/media/czz-online.svg": "/Tianyi-miku.github.io-reactdemo/static/media/czz-online.b57306316f373eff33a0c6510ad12b6e.svg",
     "static/media/error.svg": "/Tianyi-miku.github.io-reactdemo/static/media/error.1167b59eaea6210466c8b494e6e5258d.svg",
     "index.html": "/Tianyi-miku.github.io-reactdemo/index.html",
     "static/media/index.cjs": "/Tianyi-miku.github.io-reactdemo/static/media/index.433019db0fc741f26829.cjs",
@@ -58,7 +59,7 @@
     "static/media/sidedot.svg": "/Tianyi-miku.github.io-reactdemo/static/media/sidedot.af9f94eb0919d556cc37a2d911d65247.svg"
   },
   "entrypoints": [
-    "static/css/main.8e6a631f.css",
-    "static/js/main.eb55673f.js"
+    "static/css/main.637ffa4b.css",
+    "static/js/main.80f14ccf.js"
   ]
 }
