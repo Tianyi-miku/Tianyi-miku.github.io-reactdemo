@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Tianyi-miku.github.io-reactdemo/static/css/main.637ffa4b.css",
+    "main.css": "/Tianyi-miku.github.io-reactdemo/static/css/main.4484f0db.css",
     "main.js": "/Tianyi-miku.github.io-reactdemo/static/js/main.80f14ccf.js",
     "static/media/dynamic2.gif": "/Tianyi-miku.github.io-reactdemo/static/media/dynamic2.b6d425cc47fd06a4f81e.gif",
     "static/media/xingqiu.svg": "/Tianyi-miku.github.io-reactdemo/static/media/xingqiu.6bba209a3a8bfea15e307a0dc39dc310.svg",
@@ -59,7 +59,7 @@
     "static/media/sidedot.svg": "/Tianyi-miku.github.io-reactdemo/static/media/sidedot.af9f94eb0919d556cc37a2d911d65247.svg"
   },
   "entrypoints": [
-    "static/css/main.637ffa4b.css",
+    "static/css/main.4484f0db.css",
     "static/js/main.80f14ccf.js"
   ]
 }
